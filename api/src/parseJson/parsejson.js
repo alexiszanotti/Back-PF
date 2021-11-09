@@ -9,6 +9,5 @@ const fs = require('fs');
     let adidasinfo = JSON.parse(rawdata);
      adidasinfo = adidasinfo.AdidasFinal
 
-
-
 module.exports = adidasinfo 
+
