@@ -1,6 +1,6 @@
 const server = require("./src/app.js");
 const { conn, Product, Brand } = require("./src/db.js");
-const { catalogProducts } = require("./src/parseJson/parsejson.js");
+const adidasInfo = require("./src/parseJson/parsejson.js");
 
 conn.sync({ force: true }).then(() => {
   //createDB();
@@ -22,7 +22,7 @@ const createDB = async () => {
       })
     })
       
-  for (let e of catalogProducts) {
+  for (let e of adidasInfo) {
     const { ProductID, ProductName, ListingPrice, SalePrice, Discount, Images, Description, Brand: category } = e;
 
     const auxProduct = Product.create({

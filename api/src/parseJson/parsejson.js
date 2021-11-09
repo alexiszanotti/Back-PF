@@ -4,10 +4,11 @@ const path = require('path');
 
 const fs = require('fs');
 
-let rawdata = fs.readFileSync(path.join(__dirname,"../../../Assets/ADIDAS.json"));
-let student = JSON.parse(rawdata);
-let catalogProducts = student.AdidasFinal
+    let rawdata = fs.readFileSync(path.join(__dirname, "../../../Assets/ADIDAS.json"));
 
-module.exports = {
-    catalogProducts
-}; 
+    let adidasinfo = JSON.parse(rawdata);
+     adidasinfo = adidasinfo.AdidasFinal
+
+
+
+module.exports = adidasinfo 
