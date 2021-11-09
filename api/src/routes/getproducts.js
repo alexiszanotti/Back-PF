@@ -1,4 +1,4 @@
-const axios = require('axios').default;
+
 const { Router } = require('express');
 const { getProductsDataBase } = require('../controllers/getproductsinfo');
 
