@@ -1,5 +1,5 @@
 const server = require("./src/app.js");
-const { conn, Product, Brand } = require("./src/db.js");
+const { conn, Product, Brand, User } = require("./src/db.js");
 const adidasInfo = require("./src/parseJson/parsejson.js");
 
 conn.sync({ force: true }).then(() => {
@@ -21,11 +21,12 @@ const createDB = async () => {
         name: brand
       })
     })
-      
+    
+
   for (let e of adidasInfo) {
     const { ProductID, ProductName, ListingPrice, SalePrice, Discount, Images, Description, Brand: category } = e;
 
-    const auxProduct = Product.create({
+    const auxProduct = await Product.create({
       productID: ProductID,
       productName: ProductName,
       listingPrice: ListingPrice,
@@ -33,8 +34,8 @@ const createDB = async () => {
       discount: Discount,
       images: JSON.parse(Images), //convertir el texto de Images a un array
       description: Description,
-    }).then(product => {
-      Brand.findOne({ where: {name: category} }).then(brand => {
+    }).then(async product => {
+       const aux = await Brand.findOne({ where: {name: category} }).then(brand => {
         product.setBrand(brand);
       });
     });
