@@ -3,7 +3,7 @@ const { Product, Brand } = require('../db');
 
 module.exports = async function createProduct (req,res,next) {
 try  { 
-    console.log('en products');
+    
     const {productName, listingPrice, salePrice, discount, images, description, brand} = req.body;
     const newProduct = await Product.create({
         productName,
