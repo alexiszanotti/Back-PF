@@ -21,11 +21,13 @@ const createDB = async () => {
         name: brand
       })
     })
-      
+    
+
   for (let e of adidasInfo) {
     const { ProductID, ProductName, ListingPrice, SalePrice, Discount, Images, Description, Brand: category } = e;
 
-    const  auxProduct = await Product.create({
+    const auxProduct = await Product.create({
+
       productID: ProductID,
       productName: ProductName,
       listingPrice: ListingPrice,
@@ -33,8 +35,10 @@ const createDB = async () => {
       discount: Discount,
       images: JSON.parse(Images), //convertir el texto de Images a un array
       description: Description,
-    }).then( async product => {
-      const aux = await Brand.findOne({ where: {name: category} }).then(brand => {
+
+    }).then(async product => {
+       const aux = await Brand.findOne({ where: {name: category} }).then(brand => {
+
         product.setBrand(brand);
 
       });
