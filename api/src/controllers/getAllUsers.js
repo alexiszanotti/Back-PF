@@ -1,5 +1,6 @@
+const { User, conn } = require('../db');
 
-const users = [
+const usersM = [
 
     user1 = {
 
@@ -39,9 +40,15 @@ const users = [
 
 ]
 
-const getAllUsers = () => {
+const getAllUsers = async () => {
 
-    return users
+    let allUser = await User.findAll({
+
+        attributes: ['id', 'userName', 'password', 'isLoggedIn', 'type'],
+
+    })
+
+    return allUser
 }
 
 module.exports = getAllUsers

@@ -1,12 +1,12 @@
 const server = require("./src/app.js");
-const { conn, Product, Brand } = require("./src/db.js");
+const { conn, Product, Brand, User } = require("./src/db.js");
 const adidasInfo = require("./src/parseJson/parsejson.js");
 
 conn.sync({ force: true }).then(() => {
   //createDB();
   server.listen(3001, () => {
     createDB();
-    console.log("%s listening at 3001 bla bla");
+    console.log("%s listening at 3001");
   });
 });
 
@@ -41,4 +41,11 @@ const createDB = async () => {
     });
 
   }
+
+  await User.create({
+
+    userName: 'Abraham',
+    password: '1234admin',
+
+  })  
 };
