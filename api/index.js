@@ -1,13 +1,13 @@
 const e = require("cors");
 const server = require("./src/app.js");
-const { conn, Product, Brand, Size } = require("./src/db.js");
+const { conn, Product, Brand, Size, User } = require("./src/db.js");
 const adidasInfo = require("./src/parseJson/parsejson.js");
 
 conn.sync({ force: true }).then(() => {
   //createDB();
   server.listen(3001, () => {
     createDB();
-    console.log("%s listening at 3001 bla bla");
+    console.log("%s listening at 3001");
   });
 });
 
@@ -24,14 +24,6 @@ const createDB = async () => {
   })
 
 
- 
-/* 
-  .then(async product => {
-    let sizeDb = await Size.findAll({
-      where: {number : 35}
-    })
-    product.addSize(sizeDb)
-  }) */
 
  
   let size1 = await Size.create({
@@ -55,11 +47,13 @@ const createDB = async () => {
         product.addSize(size1)
       })
     })
-    
-      
 
-    
-
-    
   }
+
+  await User.create({
+
+    userName: 'Abraham',
+    password: '1234admin',
+
+  })  
 };
