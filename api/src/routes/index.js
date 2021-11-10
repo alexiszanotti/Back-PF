@@ -14,8 +14,6 @@ const router = Router();
 router.use('/', getproducts);
 router.use('/', getproductsbyid);
 router.use('/', getbrand);
-
-
 router.use('/', getAllUsersRoute);
 
 module.exports = router;

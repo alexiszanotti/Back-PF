@@ -23,5 +23,10 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: false
         },
+        type: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue:"user"
+        },
     });
 }
