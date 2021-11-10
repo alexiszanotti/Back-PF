@@ -1,4 +1,4 @@
-const { Product, Brand } = require('../db'); 
+const { Product, Brand, Size } = require('../db'); 
 
 
 async function getProductsDataBase() {
@@ -12,7 +12,12 @@ async function getProductsDataBase() {
                         model: Brand,
                         attributes: ['name'],
                          
-                    }  
+                    },
+                    {
+                        model: Size,
+                        attributes: ['number'], 
+                    }
+
 
                 ]
                    

@@ -1,5 +1,6 @@
+const e = require("cors");
 const server = require("./src/app.js");
-const { conn, Product, Brand, User } = require("./src/db.js");
+const { conn, Product, Brand, Size, User } = require("./src/db.js");
 const adidasInfo = require("./src/parseJson/parsejson.js");
 
 conn.sync({ force: true }).then(() => {
@@ -16,18 +17,23 @@ const createDB = async () => {
     'ORIGINALS',
     'CORE / NEO',
     'SPORT PERFORMANCE']
-    brands.forEach(brand => {
-      Brand.create({
-        name: brand
-      })
+  brands.forEach(brand => {
+    Brand.create({
+      name: brand
     })
-    
+  })
+
+
+
+ 
+  let size1 = await Size.create({
+    number: 35
+  })
 
   for (let e of adidasInfo) {
     const { ProductID, ProductName, ListingPrice, SalePrice, Discount, Images, Description, Brand: category } = e;
 
     const auxProduct = await Product.create({
-
       productID: ProductID,
       productName: ProductName,
       listingPrice: ListingPrice,
@@ -35,14 +41,12 @@ const createDB = async () => {
       discount: Discount,
       images: JSON.parse(Images), //convertir el texto de Images a un array
       description: Description,
-
     }).then(async product => {
-       const aux = await Brand.findOne({ where: {name: category} }).then(brand => {
-
+     await Brand.findOne({ where: { name: category } }).then(brand => {
         product.setBrand(brand);
-
-      });
-    });
+        product.addSize(size1)
+      })
+    })
 
   }
 
