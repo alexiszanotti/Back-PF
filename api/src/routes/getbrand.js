@@ -76,16 +76,16 @@ router.get("/categories/gender", async (req, res, next) => {
         console.log(error)
     } 
 });
-router.get("/categories/brand", async (req, res, next) => {
+router.get("/categories/collection", async (req, res, next) => {
     try {
         let products = await getProductsDataBase()
-        const { brand } = req.query;
-        console.log(brand)
-        console.log(products[0].brand.name)
-        if(brand){
+        const { collection } = req.query;
+        console.log(collection)
+        console.log(products[0].collection.name)
+        if(collection){
 
             const productFound = products.filter(e => {
-                return  e.brand.name.toLocaleLowerCase().includes(brand.toLocaleLowerCase()); 
+                return  e.collection.name.toLocaleLowerCase().includes(collection.toLocaleLowerCase()); 
               });
             
             
@@ -99,7 +99,7 @@ router.get("/categories/brand", async (req, res, next) => {
             
            
         }else{
-            return res.status(404).send("There is no product with that brand or the brand was sent incorrectly")
+            return res.status(404).send("There is no product with that collection or the collection was sent incorrectly")
         }
 
 
