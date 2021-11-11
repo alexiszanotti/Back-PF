@@ -11,7 +11,7 @@ router.get('/products/:id', async (req, res) => {
         if (id) {
             
             let productFound = products.filter(e => {
-                return e.productID == productID
+                return e.id == id
               });
             
             

@@ -1,17 +1,30 @@
-const { Product, Brand } = require('../db'); 
+const { Product, Brand, Size } = require('../db'); 
 
 
 async function getProductsDataBase() {
        try {
            let products = await Product.findAll({
-            include: [
-                {
-                    model: Brand,
-                    attributes: ['name']
-                }
-            ]
+
+                attributes: ['id', 'productName', 'listingPrice', 'salePrice', 'discount', 'description', 'images', ], 
+                include: [
+
+                    {
+                        model: Brand,
+                        attributes: ['name'],
+                         
+                    },
+                    {
+                        model: Size,
+                        attributes: ['number'], 
+                    }
+
+
+                ]
+                   
+                
+                
            });
-           
+          
            return products
            
        } catch (error) {
