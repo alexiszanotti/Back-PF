@@ -4,6 +4,7 @@ const { Product, Brand, Size } = require('../db');
 async function getProductsDataBase() {
        try {
            let products = await Product.findAll({
+               limit: 350,
 
                 attributes: ['id', 'productName', 'listingPrice', 'salePrice', 'discount', 'description', 'images', ], 
                 include: [
