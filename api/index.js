@@ -5,9 +5,16 @@ const adidasInfo = require("./src/parseJson/parsejson.js");
 
 conn.sync({ force: true }).then(() => {
   //createDB();
-  server.listen(3001, () => {
-    createDB();
-    console.log("%s listening at 3001");
+  server.listen(3001, async () => {
+    console.log("Espere a que se cree la base de datos..");
+    console.time("Se creo la base de datos con exito")
+    try {
+     await createDB();
+      console.timeEnd("Se creo la base de datos con exito")
+      console.log("%s listening at 3001");
+    } catch (error) {
+      console.log(error,"No se pudo crear la base de datos ")
+    }
   });
 });
 
@@ -23,9 +30,6 @@ const createDB = async () => {
     })
   })
 
-
-
- 
   let size1 = await Size.create({
     number: 35
   })
@@ -56,4 +60,5 @@ const createDB = async () => {
     password: '1234admin',
 
   })  
-};
+}
+
