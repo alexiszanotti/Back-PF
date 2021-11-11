@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('brand', {
+    sequelize.define('collection', {
         id: {
             //add uui
             type: DataTypes.UUID,

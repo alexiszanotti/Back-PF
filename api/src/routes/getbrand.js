@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const router = Router();
- const{ Brand } = require("../db") 
  const { getProductsDataBase } = require('../controllers/getproductsinfo');
+ const{ Collection } = require("../db") 
 
 
 router.get("/categories", async (req, res, next) => {
     try {
-        let categories = await Brand.findAll({
+        let categories = await Collection.findAll({
             attributes: ['name'],
         })
         if(categories){
@@ -19,6 +19,7 @@ router.get("/categories", async (req, res, next) => {
         console.log(error)
     } 
 });
+
 router.get("/categories/size", async (req, res, next) => {
     try {
        let products = await getProductsDataBase()
