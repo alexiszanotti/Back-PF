@@ -21,6 +21,7 @@ try  {
 }
 catch (err){
     next(err);
+    console.log(error)
 }
 }
 

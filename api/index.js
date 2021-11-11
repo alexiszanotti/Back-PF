@@ -9,7 +9,7 @@ conn.sync({ force: true }).then(() => {
     console.log("Espere a que se cree la base de datos..");
     console.time("Se creo la base de datos con exito")
     try {
-     await createDB();
+      createDB();
       console.timeEnd("Se creo la base de datos con exito")
       console.log("%s listening at 3001");
     } catch (error) {
@@ -25,7 +25,7 @@ const createDB = async () => {
     'CORE / NEO',
     'SPORT PERFORMANCE']
   brands.forEach(brand => {
-    Brand.create({
+     Brand.create({
       name: brand
     })
   })
