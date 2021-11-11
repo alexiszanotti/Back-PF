@@ -24,7 +24,10 @@ router.get("/categories/size", async (req, res, next) => {
     try {
        let products = await getProductsDataBase()
        const { size } = req.query;
-        if(size){
+       if(size === "ALL"){
+           return res.status(200).send(products);
+       }
+        else if(size && size !== "ALL"){
             let productFound = products.filter(e => {
                return e.Sizes[0].number.toString() === size.toString()
               });
@@ -51,9 +54,10 @@ router.get("/categories/gender", async (req, res, next) => {
     try {
        let products = await getProductsDataBase()
        const { gender } = req.query;
-        if(gender){
-
-
+       if(gender === "ALL"){
+        return res.status(200).send(products);
+    }
+        else if(gender && gender !== "ALL"){
             const productFound = products.filter(e => {
                 return e.productName.toLocaleLowerCase().includes(gender.toLocaleLowerCase());
               });
@@ -80,9 +84,10 @@ router.get("/categories/collection", async (req, res, next) => {
     try {
         let products = await getProductsDataBase()
         const { collection } = req.query;
-        console.log(collection)
-        console.log(products[0].collection.name)
-        if(collection){
+        if(collection === "ALL"){
+            return res.status(200).send(products);
+        }
+        if(collection && collection !== "ALL"){
 
             const productFound = products.filter(e => {
                 return  e.collection.name.toLocaleLowerCase().includes(collection.toLocaleLowerCase()); 
