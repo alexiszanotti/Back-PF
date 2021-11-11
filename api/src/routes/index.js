@@ -8,7 +8,7 @@ const getproducts = require("./getproducts")
 const getproductsbyid = require("./getproductsbyid")
 const getbrand= require("./getbrand")
 const postEditProducts = require("./postEditProducts")
-
+const postEditUsers = require("./postEditUsers")
 
 const router = Router();
 router.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -19,5 +19,5 @@ router.use('/', getproductsbyid);
 router.use('/', getbrand);
 router.use('/', getAllUsersRoute);
 router.use('/', postEditProducts);
-
+router.use('/', postEditUsers)
 module.exports = router;

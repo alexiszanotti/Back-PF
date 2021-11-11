@@ -18,6 +18,8 @@ conn.sync({ force: true }).then(() => {
   });
 });
 
+
+///create DB from json file
 const createDB = async () => {
   let i = 0;
   const brands = [
@@ -28,11 +30,13 @@ const createDB = async () => {
     Brand.create({
       name: brand
     })
+
   })
 
   let size1 = await Size.create({
     number: 35
   })
+
 
   for (let e of adidasInfo) {
     const { ProductID, ProductName, ListingPrice, SalePrice, Discount, Images, Description, Brand: category } = e;
@@ -54,11 +58,20 @@ const createDB = async () => {
 
   }
 
+  //create admin user for testing 
   await User.create({
+    email: "admin@email.com",
+    userName: "admin",
+    password: "admin",
+    type: "Admin",
+    name: "adminTest",
+    lastName: "adminLastname",
+    birthDay: "2000-01-01",
+    gender: "Other",
 
-    userName: 'Abraham',
-    password: '1234admin',
+  })
 
-  })  
-}
+
+
+};
 

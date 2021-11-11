@@ -8,8 +8,23 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV1,
             allowNull: false,
             primaryKey: true
-        },   
+        },  
         userName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        }, 
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+        lastName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
+        birthDay: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true
@@ -18,15 +33,12 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        isLoggedIn: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false
-        },
+        gender:{
+            type: DataTypes.ENUM('Male', 'Female', 'Other')
+        }, 
         type: {
-            type: DataTypes.STRING,
+            type: DataTypes.ENUM('Admin', 'User'),
             allowNull: false,
-            defaultValue:"user"
         },
     });
 }
