@@ -69,7 +69,3 @@ const createDB = async () => {
 
 
 };
-
-
-
-
