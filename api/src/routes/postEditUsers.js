@@ -1,5 +1,9 @@
 const { Router } = require('express');
 const router = Router();
 
-const createProduct = require('../controllers/createUser');
-const updateProduct = require('../controllers/updateUser');
+const createUser = require('../controllers/createUser');
+//const updateProduct = require('../controllers/updateUser');
+
+router.post('/createProduct', createUser);
+
+module.exports = router;

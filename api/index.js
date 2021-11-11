@@ -6,10 +6,12 @@ conn.sync({ force: true }).then(() => {
   //createDB();
   server.listen(3001, () => {
     createDB();
-    console.log("%s listening at 3001 bla bla");
+    console.log("%s listening at 3001");
   });
 });
 
+
+///create DB from json file
 const createDB = async () => {
   let i = 0;
   const brands = [
@@ -21,7 +23,6 @@ const createDB = async () => {
         name: brand
       })
     })
-    
 
   for (let e of adidasInfo) {
     const { ProductID, ProductName, ListingPrice, SalePrice, Discount, Images, Description, Brand: category } = e;
@@ -41,4 +42,21 @@ const createDB = async () => {
     });
 
   }
+  //create admin user for testing 
+  await User.create({
+    email: "admin@email.com",
+    userName: "admin",
+    password: "admin",
+    type: "Admin",
+    name: "adminTest",
+    lastName: "adminLastname",
+    birthDay: "2000-01-01",
+    gender: "Other",
+
+  })
+
 };
+
+
+//create admin user for testing
+
