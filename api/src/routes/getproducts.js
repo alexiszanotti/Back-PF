@@ -1,14 +1,11 @@
-
-const { Router } = require('express');
-const { getProductsDataBase } = require('../controllers/getproductsinfo');
+const { Router } = require("express");
+const { getProductsDataBase } = require("../controllers/getproductsinfo");
 
 const router = Router();
 
 router.get("/products", async (req, res, next) => {
-
-
   try {
-    const products = await getProductsDataBase()
+    const products = await getProductsDataBase();
 
     const { name } = req.query;
     if (name) {
@@ -18,19 +15,14 @@ router.get("/products", async (req, res, next) => {
 
       if (!products_Found.length) {
         return res.status(404).send({ msg: "Products not found" });
-      };
+      }
       return res.status(200).send(products_Found);
     } else {
       return res.status(200).send(products);
     }
- 
-
   } catch (error) {
     next(error);
   }
-
-
-
-})
+});
 
 module.exports = router;
