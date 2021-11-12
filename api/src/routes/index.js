@@ -9,6 +9,8 @@ const getproductsbyid = require("./getproductsbyid")
 const getbrand= require("./getbrand")
 const postEditProducts = require("./postEditProducts")
 const postEditUsers = require("./postEditUsers")
+const getReviews = require("./getReviews")
+const postReviews = require("./postReviews")
 
 const router = Router();
 router.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -20,4 +22,6 @@ router.use('/', getbrand);
 router.use('/', getAllUsersRoute);
 router.use('/', postEditProducts);
 router.use('/', postEditUsers)
+router.use('/', getReviews)
+router.use('/', postReviews)
 module.exports = router;
