@@ -1,11 +1,11 @@
 const { Router } = require("express");
 const router = Router();
-const { Brand } = require("../db");
 const { getProductsDataBase } = require("../controllers/getproductsinfo");
+const { Collection } = require("../db");
 
 router.get("/categories", async (req, res, next) => {
   try {
-    let categories = await Brand.findAll({
+    let categories = await Collection.findAll({
       attributes: ["name"],
     });
     if (categories) {
@@ -17,11 +17,14 @@ router.get("/categories", async (req, res, next) => {
     console.log(error);
   }
 });
+
 router.get("/categories/size", async (req, res, next) => {
   try {
     let products = await getProductsDataBase();
     const { size } = req.query;
-    if (size) {
+    if (size === "ALL") {
+      return res.status(200).send(products);
+    } else if (size && size !== "ALL") {
       let productFound = products.filter(e => {
         return e.Sizes[0].number.toString() === size.toString();
       });
@@ -45,7 +48,9 @@ router.get("/categories/gender", async (req, res, next) => {
   try {
     let products = await getProductsDataBase();
     const { gender } = req.query;
-    if (gender) {
+    if (gender === "ALL") {
+      return res.status(200).send(products);
+    } else if (gender && gender !== "ALL") {
       const productFound = products.filter(e => {
         return e.productName.toLocaleLowerCase().includes(gender.toLocaleLowerCase());
       });
@@ -64,13 +69,16 @@ router.get("/categories/gender", async (req, res, next) => {
     console.log(error);
   }
 });
-router.get("/categories/brand", async (req, res, next) => {
+router.get("/categories/collection", async (req, res, next) => {
   try {
     let products = await getProductsDataBase();
-    const { brand } = req.query;
-    if (brand) {
+    const { collection } = req.query;
+    if (collection === "ALL") {
+      return res.status(200).send(products);
+    }
+    if (collection && collection !== "ALL") {
       const productFound = products.filter(e => {
-        return e.brand.name.toLocaleLowerCase().includes(brand.toLocaleLowerCase());
+        return e.collection.name.toLocaleLowerCase().includes(collection.toLocaleLowerCase());
       });
 
       if (!productFound.length) {
@@ -81,7 +89,7 @@ router.get("/categories/brand", async (req, res, next) => {
     } else {
       return res
         .status(404)
-        .send("There is no product with that brand or the brand was sent incorrectly");
+        .send("There is no product with that collection or the collection was sent incorrectly");
     }
   } catch (error) {
     console.log(error);

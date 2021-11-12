@@ -1,8 +1,9 @@
-const { Product, Brand } = require("../db");
+const { Product, Collection } = require("../db");
 
 module.exports = async function createProduct(req, res, next) {
   try {
-    const { productName, listingPrice, salePrice, discount, images, description, brand } = req.body;
+    const { productName, listingPrice, salePrice, discount, images, description, collection } =
+      req.body;
     const newProduct = await Product.create({
       productName,
       listingPrice,
@@ -11,9 +12,9 @@ module.exports = async function createProduct(req, res, next) {
       images,
       description,
     });
-    const newBrand = await Brand.findOrCreate({ where: { name: brand } });
+    const newCollection = await Collection.findOrCreate({ where: { name: collection } });
 
-    await newProduct.setBrand(newBrand[0]);
+    await newProduct.setCollection(newCollection[0]);
 
     res.status(200).json(newProduct);
   } catch (err) {

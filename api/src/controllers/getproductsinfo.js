@@ -1,4 +1,4 @@
-const { Product, Brand, Size } = require("../db");
+const { Product, Collection, Size } = require("../db");
 
 async function getProductsDataBase() {
   try {
@@ -16,7 +16,7 @@ async function getProductsDataBase() {
       ],
       include: [
         {
-          model: Brand,
+          model: Collection,
           attributes: ["name"],
         },
         {
