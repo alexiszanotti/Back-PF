@@ -1,5 +1,5 @@
 const { User } = require("../db");
-module.exports = updateUser = async (req, res, next) => {
+module.exports = loginUser = async (req, res, next) => {
   const { userName, password } = req.body;
 
   try {
