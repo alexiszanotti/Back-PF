@@ -3,7 +3,7 @@ const { Product, Collection, Size } = require("../db");
 async function getProductsDataBase() {
   try {
     let products = await Product.findAll({
-      limit: 350,
+      //limit: 100,
 
       attributes: [
         "id",

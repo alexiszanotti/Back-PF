@@ -47,20 +47,29 @@ router.get("/categories/size", async (req, res, next) => {
 router.get("/categories/gender", async (req, res, next) => {
   try {
     let products = await getProductsDataBase();
-    const { gender } = req.query;
-    if (gender === "ALL") {
+    //console.log(products)
+   const { gender } = req.query;
+   console.log(gender)
+    if (gender === "All") {
       return res.status(200).send(products);
-    } else if (gender && gender !== "ALL") {
+
+    } else if (gender !== "All") {
       const productFound = products.filter(e => {
-        return e.productName.toLocaleLowerCase().includes(gender.toLocaleLowerCase());
+        { 
+          
+          return e.productName.charAt(0) === gender.charAt(0)}
+       
       });
+      
 
       if (!productFound.length) {
         return res.status(400).send("No product with that genre was found");
       } else {
+        
         return res.status(200).send(productFound);
       }
-    } else {
+     } 
+    else {
       return res
         .status(404)
         .send("There is no product with that gender or the gender was sent incorrectly");
@@ -69,6 +78,8 @@ router.get("/categories/gender", async (req, res, next) => {
     console.log(error);
   }
 });
+
+
 router.get("/categories/collection", async (req, res, next) => {
   try {
     let products = await getProductsDataBase();

@@ -15,15 +15,19 @@ router.get("/getAllUsers", async (req, res, next) => {
 });
 
 router.get("/getAllUsers/:name", async (req, res, next) => {
-  const { name } = req.params;
+  const { name, gender } = req.params;
 
   try {
     const allUser = await getAllUsers();
 
+    const allUser = await getAllUsers();
+    gender && (allUser = allUser.filter(e => e.name.charAt(0) === gender.charAt(0)));
+
     const user = allUser.filter(e => e.userName === name);
 
     if (user.length > 0) return res.status(200).send(user);
-    else return res.status(404).send({ error: "el usuario no existe" });
+
+    return res.status(404).send({ error: "el usuario no existe" });
   } catch (error) {
     console.log(error);
   }
