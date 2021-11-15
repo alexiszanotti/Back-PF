@@ -20,7 +20,6 @@ router.get("/getAllUsers/:name", async (req, res, next) => {
   try {
     const allUser = await getAllUsers();
 
-    const allUser = await getAllUsers();
     gender && (allUser = allUser.filter(e => e.name.charAt(0) === gender.charAt(0)));
 
     const user = allUser.filter(e => e.userName === name);
