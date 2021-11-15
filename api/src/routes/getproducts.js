@@ -7,7 +7,7 @@ router.get("/products", async (req, res, next) => {
   try {
     const products = await getProductsDataBase();
 
-    const { name } = req.query;
+    const { name, gender, collection,  } = req.query;
     if (name) {
       const products_Found = products.filter(e => {
         return e.productName.toLocaleLowerCase().includes(name.toLocaleLowerCase());
