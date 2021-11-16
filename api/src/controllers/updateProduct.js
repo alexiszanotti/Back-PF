@@ -1,6 +1,6 @@
 const { Product, Collection } = require("../db");
 
-module.exports = async function updateProdut(req, res, next) {
+async function updateProduct(req, res, next) {
   try {
     const { id, productName, listingPrice, salePrice, discount, images, description, collection } =
       req.body;
@@ -18,4 +18,6 @@ module.exports = async function updateProdut(req, res, next) {
   } catch (error) {
     next(error);
   }
-};
+}
+
+module.exports = { updateProduct };

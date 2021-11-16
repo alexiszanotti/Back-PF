@@ -1,6 +1,6 @@
 const { User } = require("../db");
 
-module.exports = async function createUser(req, res, next) {
+async function createUser(req, res, next) {
   try {
     const { userName, name, lastName, birthDay, password, gender } = req.body;
 
@@ -10,4 +10,5 @@ module.exports = async function createUser(req, res, next) {
   } catch (err) {
     next(err);
   }
-};
+}
+module.exports = { createUser };

@@ -1,8 +1,6 @@
-const { Router } = require("express");
 const { Reviews } = require("../db");
-const router = Router();
 
-router.get("/reviews", async (req, res, next) => {
+async function getReviews(req, res) {
   let { id } = req.query;
   try {
     if (id) {
@@ -21,6 +19,6 @@ router.get("/reviews", async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-});
+}
 
-module.exports = router;
+module.exports = { getReviews };
