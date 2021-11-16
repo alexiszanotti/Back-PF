@@ -1,5 +1,5 @@
 const { Collection, Size, Product } = require("../db");
-// const { getProductsDataBase } = require("../controllers/getproductsinfo");
+const { getProductsDataBase } = require("../controllers/getProductsDataBase.js");
 
 const size = async (req, res, next) => {
   try {
@@ -40,7 +40,6 @@ const gender = async (req, res, next) => {
     }
     if (gender && gender !== "All") {
       const productFound = await products.filter(e => {
-        console.log(e.productName);
         return e.productName.toLowerCase().charAt(0) === gender.toLowerCase().charAt(0);
       });
 
@@ -62,8 +61,9 @@ const gender = async (req, res, next) => {
 const collection = async (req, res, next) => {
   try {
     let products = await getProductsDataBase();
-    console.log(products, "GATO");
+
     const { collection } = req.query;
+
     if (collection === "All") {
       return res.status(200).send(products);
     }
@@ -86,12 +86,5 @@ const collection = async (req, res, next) => {
     console.log(error);
   }
 };
-
-async function getProductsDataBase() {
-  let products = await Product.findAll({
-    include: { model: Collection, attributes: ["name"] },
-  });
-  return products;
-}
 
 module.exports = { size, gender, collection };
