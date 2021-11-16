@@ -1,26 +1,7 @@
 const { Router } = require("express");
 const router = Router();
-const { getProductsDataBase } = require("../controllers/getproductsinfo");
+const { getProductById } = require("../controllers/getProductById");
 
-router.get("/products/:id", async (req, res) => {
-  const { id } = req.params;
-  const products = await getProductsDataBase();
-
-  try {
-    if (id) {
-      let productFound = products.filter(e => {
-        return e.id == id;
-      });
-
-      if (productFound.length === 0) {
-        return res.status(400).send("there is no such product id");
-      } else {
-        return res.status(200).send(productFound);
-      }
-    }
-  } catch (e) {
-    return res.status(400).send({ e: "Id incorrecto" });
-  }
-});
+router.get("/products/:id", getProductById);
 
 module.exports = router;
