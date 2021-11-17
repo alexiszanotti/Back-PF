@@ -1,16 +1,25 @@
-const { User, conn } = require("../db");
+const { User } = require("../db");
 
-
-
-const getAllUsers = async () => {
-
-    let allUser = await User.findAll({
-
-        attributes: ['id', 'userName','name','lastName', 'birthDay', 'password', 'gender', 'type'],
-
-    })
-
-    return allUser
+async function getAllUsers(req, res, next) {
+  const { id } = req.body;
+  try {
+    if (id) {
+      const user = await User.findOne({
+        where: {
+          id,
+        },
+      });
+      res.status(200).send(user);
+    } else {
+      const users = await User.findAll({
+        attributes: ["id", "name", "lastName", "userName", "type", "birthDay", "gender"],
+      }).then(users => {
+        res.status(200).send(users);
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
 }
 
-module.exports = getAllUsers;
+module.exports = { getAllUsers };

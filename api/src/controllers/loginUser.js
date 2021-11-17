@@ -1,5 +1,6 @@
 const { User } = require("../db");
-module.exports = loginUser = async (req, res, next) => {
+
+async function loginUser(req, res, next) {
   const { userName, password } = req.body;
 
   try {
@@ -16,4 +17,6 @@ module.exports = loginUser = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
+
+module.exports = { loginUser };

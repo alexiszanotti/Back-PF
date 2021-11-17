@@ -1,6 +1,6 @@
 const { User } = require("../db");
 
-module.exports = updateUser = async (req, res, next) => {
+async function updateUser(req, res, next) {
   const { id, userName, name, lastName, birthDay, password, gender, type } = req.body;
 
   try {
@@ -15,4 +15,6 @@ module.exports = updateUser = async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-};
+}
+
+module.exports = { updateUser };

@@ -1,6 +1,6 @@
 const { Product, Collection } = require("../db");
 
-module.exports = async function createProduct(req, res, next) {
+async function createProduct(req, res, next) {
   try {
     const { productName, listingPrice, salePrice, discount, images, description, collection } =
       req.body;
@@ -20,4 +20,6 @@ module.exports = async function createProduct(req, res, next) {
   } catch (err) {
     next(err);
   }
-};
+}
+
+module.exports = { createProduct };
