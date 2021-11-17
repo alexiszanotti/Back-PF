@@ -87,4 +87,20 @@ const collection = async (req, res, next) => {
   }
 };
 
-module.exports = { size, gender, collection };
+async function collections(req, res, next) {
+  try {
+    const collections = await Collection.findAll({
+      attributes: ["name"],
+    });
+
+    if (!collections.length) {
+      return res.status(400).send("No hay colecciones disponibles");
+    } else {
+      return res.status(200).send(collections);
+    }
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = { size, gender, collection, collections };

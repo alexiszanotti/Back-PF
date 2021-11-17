@@ -4,7 +4,6 @@ async function filterPrice(req, res) {
   try {
     const { order } = req.query;
     if (order === "ASC") {
-      console.log(`order: ${order}`);
       const products = await Product.findAll({
         order: [["salePrice", "ASC"]],
       });
