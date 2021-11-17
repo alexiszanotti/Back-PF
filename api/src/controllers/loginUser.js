@@ -1,14 +1,14 @@
 const { User } = require("../db");
 
 async function loginUser(req, res, next) {
-  const { userName, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ where: { userName, password } });
+    const user = await User.findOne({ where: { email, password } });
 
     if (!user) return res.status(404).json("user not found");
     const userRes = {
-      userName: user.userName,
+      email: user.email,
       id: user.id,
       type: user.type,
     };
