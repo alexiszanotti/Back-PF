@@ -3,7 +3,7 @@ const { getReviews } = require("../controllers/getReviews");
 const { postReviews } = require("../controllers/postReviews");
 const router = Router();
 
-router.get("/:id", getReviews);
+router.get("/", getReviews);
 router.post("/", postReviews);
 
 module.exports = router;
