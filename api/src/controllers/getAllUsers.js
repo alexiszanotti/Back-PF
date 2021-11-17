@@ -12,7 +12,7 @@ async function getAllUsers(req, res, next) {
       res.status(200).send(user);
     } else {
       const users = await User.findAll({
-        attributes: ["id", "name", "lastName", "userName", "type", "birthDay", "gender"],
+        attributes: ["id", "name", "lastName", "email", "type", "birthDay", "gender"],
       }).then(users => {
         res.status(200).send(users);
       });
