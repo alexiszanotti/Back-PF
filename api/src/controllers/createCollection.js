@@ -5,7 +5,7 @@ async function createCollection(req, res, next) {
     const { name } = req.body;
     if (!name) {
       return res.status(400).send({
-        message: "El Nombre es requerido",
+        Error: "El Nombre es requerido",
       });
     }
     const collection = await Collection.create({
