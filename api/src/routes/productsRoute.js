@@ -8,7 +8,7 @@ const router = Router();
 
 router.get("/", getProducts);
 router.get("/:id", getProductById);
-router.post("/createProduct", createProduct);
-router.post("/updateProduct", updateProduct);
+router.post("/", createProduct);
+router.patch("/", updateProduct);
 
 module.exports = router;

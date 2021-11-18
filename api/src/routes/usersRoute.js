@@ -7,8 +7,8 @@ const { loginUser } = require("../controllers/loginUser");
 const router = Router();
 
 router.get("/", getAllUsers);
-router.post("/createUser", createUser);
-router.post("/updateUser", updateUser);
+router.post("/", createUser);
+router.patch("/", updateUser);
 router.post("/loginUser", loginUser);
 
 module.exports = router;
