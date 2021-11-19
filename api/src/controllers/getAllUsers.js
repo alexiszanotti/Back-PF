@@ -1,4 +1,4 @@
-const { User } = require("../db");
+const { User, Product } = require("../db");
 
 async function getAllUsers(req, res, next) {
   const { id } = req.body;
@@ -12,7 +12,24 @@ async function getAllUsers(req, res, next) {
       res.status(200).send(user);
     } else {
       const users = await User.findAll({
-        attributes: ["id", "name", "lastName", "email", "type", "birthDay", "gender"],
+        attributes: [
+          "id",
+          "name",
+          "lastName",
+          "email",
+          "type",
+          "birthDay",
+          "gender",
+          "telephone",
+          "adress",
+          "cp",
+        ],
+        include: [
+          {
+            model: Product,
+            attributes: ["id", "productName"],
+          },
+        ],
       }).then(users => {
         res.status(200).send(users);
       });

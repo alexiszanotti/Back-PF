@@ -39,16 +39,12 @@ module.exports = sequelize => {
     },
     adress: {
       type: DataTypes.STRING,
-     
     },
     cp: {
       type: DataTypes.STRING,
-      
     },
     telephone: {
       type: DataTypes.INTEGER,
-   
-  },
-
+    },
   });
 };

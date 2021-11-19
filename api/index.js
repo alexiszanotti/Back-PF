@@ -63,12 +63,15 @@ const createDB = async () => {
 
   //create admin user for testing
   await User.create({
-    email: "admin@email.com",
-    password: "admin",
-    type: "Admin",
     name: "adminTest",
     lastName: "adminLastname",
     birthDay: "2000-01-01",
+    password: "admin",
     gender: "Other",
+    type: "Admin",
+    email: "admin@email.com",
+    adress: "Av Libertador",
+    cp: "CP1430",
+    telephone: 11547894,
   });
 };
