@@ -37,5 +37,18 @@ module.exports = sequelize => {
       allowNull: false,
       unique: true,
     },
+    adress: {
+      type: DataTypes.STRING,
+     
+    },
+    cp: {
+      type: DataTypes.STRING,
+      
+    },
+    telephone: {
+      type: DataTypes.INTEGER,
+   
+  },
+
   });
 };
