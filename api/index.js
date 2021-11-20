@@ -24,17 +24,13 @@ const createDB = async () => {
   const collections = ["ORIGINALS", "CORE / NEO", "SPORT PERFORMANCE"];
 
   collections.forEach(collection => {
-    Collection.findOrCreate({
-      where: {
-        name: collection,
-      },
+    Collection.create({
+      name: collection,
     });
   });
 
-  let size1 = await Size.findOrCreate({
-    where: {
-      number: 35,
-    },
+  let size1 = await Size.create({
+    number: 35,
   });
 
   for (let e of adidasInfo) {
@@ -66,20 +62,16 @@ const createDB = async () => {
   }
 
   //create admin user for testing
-  await User.findOrCreate({
-    where: {
-      name: "adminTest",
-    },
-    defaults: {
-      lastName: "adminLastname",
-      birthDay: "2000-01-01",
-      password: "admin",
-      gender: "Other",
-      type: "Admin",
-      email: "admin@email.com",
-      adress: "Av Libertador",
-      cp: "CP1430",
-      telephone: 11547894,
-    },
+  await User.create({
+    name: "adminTest",
+    lastName: "adminLastname",
+    birthDay: "2000-01-01",
+    password: "admin",
+    gender: "Other",
+    type: "Admin",
+    email: "admin@email.com",
+    adress: "Av Libertador",
+    cp: "CP1430",
+    telephone: 11547894,
   });
 };
