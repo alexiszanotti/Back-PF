@@ -3,7 +3,7 @@ const server = require("./src/app.js");
 const { conn, Product, Collection, User, Size } = require("./src/db.js");
 const adidasInfo = require("./src/parseJson/parsejson.js");
 
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   //createDB();
   server.listen(3001, async () => {
     console.log("Espere a que se cree la base de datos..");
