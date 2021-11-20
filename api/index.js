@@ -52,7 +52,8 @@ const createDB = async () => {
     await Product.findOrCreate({
       where: {
         productID: ProductID,
-
+      },
+      defaults: {
         productName: ProductName,
         listingPrice: ListingPrice,
         salePrice: SalePrice,
@@ -72,6 +73,8 @@ const createDB = async () => {
   await User.findOrCreate({
     where: {
       name: "adminTest",
+    },
+    defaults: {
       lastName: "adminLastname",
       birthDay: "2000-01-01",
       password: "admin",
