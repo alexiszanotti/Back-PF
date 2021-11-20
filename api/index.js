@@ -2,10 +2,11 @@ const e = require("cors");
 const server = require("./src/app.js");
 const { conn, Product, Collection, User, Size } = require("./src/db.js");
 const adidasInfo = require("./src/parseJson/parsejson.js");
+require("dotenv").config();
 
 conn.sync({ force: false }).then(() => {
   //createDB();
-  server.listen(3001, async () => {
+  server.listen(process.env.PORT || 3001, async () => {
     console.log("Espere a que se cree la base de datos..");
     console.time("Se creo la base de datos con exito");
     try {
