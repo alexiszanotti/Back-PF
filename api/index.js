@@ -24,13 +24,17 @@ const createDB = async () => {
   const collections = ["ORIGINALS", "CORE / NEO", "SPORT PERFORMANCE"];
 
   collections.forEach(collection => {
-    Collection.create({
-      name: collection,
+    Collection.findOrCreate({
+      where: {
+        name: collection,
+      },
     });
   });
 
-  let size1 = await Size.create({
-    number: 35,
+  let size1 = await Size.findOrCreate({
+    where: {
+      number: 35,
+    },
   });
 
   for (let e of adidasInfo) {
@@ -45,14 +49,17 @@ const createDB = async () => {
       Brand: category,
     } = e;
 
-    await Product.create({
-      productID: ProductID,
-      productName: ProductName,
-      listingPrice: ListingPrice,
-      salePrice: SalePrice,
-      discount: Discount,
-      images: JSON.parse(Images), //convertir el texto de Images a un array
-      description: Description,
+    await Product.findOrCreate({
+      where: {
+        productID: ProductID,
+
+        productName: ProductName,
+        listingPrice: ListingPrice,
+        salePrice: SalePrice,
+        discount: Discount,
+        images: JSON.parse(Images), //convertir el texto de Images a un array
+        description: Description,
+      },
     }).then(async product => {
       await Collection.findOne({ where: { name: category } }).then(collection => {
         product.setCollection(collection);
@@ -62,16 +69,18 @@ const createDB = async () => {
   }
 
   //create admin user for testing
-  await User.create({
-    name: "adminTest",
-    lastName: "adminLastname",
-    birthDay: "2000-01-01",
-    password: "admin",
-    gender: "Other",
-    type: "Admin",
-    email: "admin@email.com",
-    adress: "Av Libertador",
-    cp: "CP1430",
-    telephone: 11547894,
+  await User.findOrCreate({
+    where: {
+      name: "adminTest",
+      lastName: "adminLastname",
+      birthDay: "2000-01-01",
+      password: "admin",
+      gender: "Other",
+      type: "Admin",
+      email: "admin@email.com",
+      adress: "Av Libertador",
+      cp: "CP1430",
+      telephone: 11547894,
+    },
   });
 };
