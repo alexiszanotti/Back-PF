@@ -49,18 +49,14 @@ const createDB = async () => {
       Brand: category,
     } = e;
 
-    await Product.findOrCreate({
-      where: {
-        productID: ProductID,
-      },
-      defaults: {
-        productName: ProductName,
-        listingPrice: ListingPrice,
-        salePrice: SalePrice,
-        discount: Discount,
-        images: JSON.parse(Images), //convertir el texto de Images a un array
-        description: Description,
-      },
+    await Product.create({
+      productID: ProductID,
+      productName: ProductName,
+      listingPrice: ListingPrice,
+      salePrice: SalePrice,
+      discount: Discount,
+      images: JSON.parse(Images), //convertir el texto de Images a un array
+      description: Description,
     }).then(async product => {
       await Collection.findOne({ where: { name: category } }).then(collection => {
         product.setCollection(collection);
