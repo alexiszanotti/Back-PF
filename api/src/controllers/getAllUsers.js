@@ -21,7 +21,7 @@ async function getAllUsers(req, res, next) {
           "birthDay",
           "gender",
           "telephone",
-          "adress",
+          "address",
           "cp",
         ],
         include: [

@@ -64,7 +64,7 @@ const createDB = async () => {
     gender: "Other",
     type: "Admin",
     email: "admin@email.com",
-    adress: "Av Libertador",
+    address: "Av Libertador",
     cp: "CP1430",
     telephone: 11547894,
   });
