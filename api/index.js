@@ -37,7 +37,7 @@ const createDB = async () => {
       Collection: category,
       Stock
     } = e;
-
+//sadasdasdasd
     await Product.create({
       gender: Gender,
       productName: ProductName,
