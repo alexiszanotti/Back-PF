@@ -1,5 +1,5 @@
 const server = require("./src/app.js");
-const { conn, Product, Collection, User } = require("./src/db.js");
+const { conn, Product, Collection, User} = require("./src/db.js");
 const adidasInfo = require("./src/parseJson/parsejson.js");
 require("dotenv").config();
 
@@ -19,42 +19,39 @@ conn.sync({ force: false }).then(() => {
 
 ///create DB from json file
 const createDB = async () => {
-  let i = 0;
   const collections = ["ORIGINALS", "CORE / NEO", "SPORT PERFORMANCE"];
-
   collections.forEach(collection => {
     Collection.create({
       name: collection,
     });
   });
-
   for (let e of adidasInfo) {
     const {
-      ProductID,
+      Gender,
       ProductName,
       ListingPrice,
       SalePrice,
       Discount,
       Images,
       Description,
-      Brand: category,
+      Collection: category,
+      Stock
     } = e;
-
     await Product.create({
-      productID: ProductID,
+      gender: Gender,
       productName: ProductName,
       listingPrice: ListingPrice,
       salePrice: SalePrice,
       discount: Discount,
-      images: JSON.parse(Images), //convertir el texto de Images a un array
+      images: Images, //convertir el texto de Images a un array
       description: Description,
+      stock: Stock
     }).then(async product => {
       await Collection.findOne({ where: { name: category } }).then(collection => {
         product.setCollection(collection);
       });
-    });
+    }); 
   }
-
   //create admin user for testing
   await User.create({
     name: "adminTest",
