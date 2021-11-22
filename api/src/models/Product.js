@@ -41,5 +41,13 @@ module.exports = sequelize => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
   });
+  {
+    timestamps: false;
+  }
 };

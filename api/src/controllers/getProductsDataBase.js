@@ -1,4 +1,4 @@
-const { Product, Collection, Size } = require("../db");
+const { Product, Collection } = require("../db");
 
 async function getProductsDataBase() {
   let products = await Product.findAll({
@@ -16,10 +16,6 @@ async function getProductsDataBase() {
       {
         model: Collection,
         attributes: ["name"],
-      },
-      {
-        model: Size,
-        attributes: ["number"],
       },
     ],
   });

@@ -37,7 +37,7 @@ module.exports = sequelize => {
       allowNull: false,
       unique: true,
     },
-    adress: {
+    address: {
       type: DataTypes.STRING,
     },
     cp: {
@@ -46,5 +46,26 @@ module.exports = sequelize => {
     telephone: {
       type: DataTypes.INTEGER,
     },
+    number: {
+      type: DataTypes.INTEGER,
+    },
+    location: {
+      type: DataTypes.STRING,
+    },
+    document: {
+      type: DataTypes.INTEGER,
+    },
+    province: {
+      type: DataTypes.STRING,
+    },
+    floor: {
+      type: DataTypes.STRING,
+    },
+    department: {
+      type: DataTypes.STRING,
+    },
   });
+  {
+    timestamps: false;
+  }
 };
