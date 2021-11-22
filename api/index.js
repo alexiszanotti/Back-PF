@@ -1,11 +1,9 @@
-const e = require("cors");
 const server = require("./src/app.js");
-const { conn, Product, Collection, User, Size } = require("./src/db.js");
+const { conn, Product, Collection, User } = require("./src/db.js");
 const adidasInfo = require("./src/parseJson/parsejson.js");
 require("dotenv").config();
 
 conn.sync({ force: false }).then(() => {
-  //createDB();
   server.listen(process.env.PORT || 3001, async () => {
     console.log("Espere a que se cree la base de datos..");
     console.time("Se creo la base de datos con exito");
@@ -28,10 +26,6 @@ const createDB = async () => {
     Collection.create({
       name: collection,
     });
-  });
-
-  let size1 = await Size.create({
-    number: 35,
   });
 
   for (let e of adidasInfo) {
@@ -57,7 +51,6 @@ const createDB = async () => {
     }).then(async product => {
       await Collection.findOne({ where: { name: category } }).then(collection => {
         product.setCollection(collection);
-        product.addSize(size1);
       });
     });
   }
