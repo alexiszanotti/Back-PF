@@ -1,33 +1,5 @@
-const { Collection, Size, Product } = require("../db");
+const { Collection, Product } = require("../db");
 const { getProductsDataBase } = require("../controllers/getProductsDataBase.js");
-
-const size = async (req, res, next) => {
-  try {
-    let products = {};
-
-    const { size } = req.query;
-
-    if (size === "All") {
-      products = await Size.findAll({ include: { model: Product, attributes: ["productName"] } });
-      return res.status(200).send(products);
-    } else if (size && size !== "All") {
-      products = await Size.findAll({
-        where: { number: size },
-        include: { model: Product, attributes: ["productName"] },
-      });
-
-      if (!products.length) {
-        return res.status(400).send("No hay productos con ese talle");
-      } else {
-        return res.status(200).send(products);
-      }
-    } else {
-      return res.status(406).send("No se recibieron parametros para realizar la busqueda");
-    }
-  } catch (error) {
-    next(error);
-  }
-};
 
 const gender = async (req, res, next) => {
   try {
@@ -103,4 +75,4 @@ async function collections(req, res, next) {
   }
 }
 
-module.exports = { size, gender, collection, collections };
+module.exports = { gender, collection, collections };
