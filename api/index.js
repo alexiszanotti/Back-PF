@@ -1,6 +1,6 @@
-const e = require("cors");
+
 const server = require("./src/app.js");
-const { conn, Product, Collection, User, Size } = require("./src/db.js");
+const { conn, Product, Collection, User} = require("./src/db.js");
 const adidasInfo = require("./src/parseJson/parsejson.js");
 
 conn.sync({ force: true }).then(() => {
@@ -20,7 +20,7 @@ conn.sync({ force: true }).then(() => {
 
 ///create DB from json file
 const createDB = async () => {
-  let i = 0;
+  
   const collections = ["ORIGINALS", "CORE / NEO", "SPORT PERFORMANCE"];
 
   collections.forEach(collection => {
@@ -29,36 +29,37 @@ const createDB = async () => {
     });
   });
 
-  let size1 = await Size.create({
-    number: 35,
-  });
 
+  
   for (let e of adidasInfo) {
     const {
-      ProductID,
+      Gender,
       ProductName,
       ListingPrice,
       SalePrice,
       Discount,
       Images,
       Description,
-      Brand: category,
+      Collection: category,
+      Stock
     } = e;
 
+    
     await Product.create({
-      productID: ProductID,
+      gender: Gender,
       productName: ProductName,
       listingPrice: ListingPrice,
       salePrice: SalePrice,
       discount: Discount,
-      images: JSON.parse(Images), //convertir el texto de Images a un array
+      images: Images, //convertir el texto de Images a un array
       description: Description,
+      stock: Stock
     }).then(async product => {
       await Collection.findOne({ where: { name: category } }).then(collection => {
         product.setCollection(collection);
-        product.addSize(size1);
+        
       });
-    });
+    }); 
   }
 
   //create admin user for testing
