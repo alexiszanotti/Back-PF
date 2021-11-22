@@ -1,14 +1,17 @@
-const { User } = require("../db");
+//email, name, lastName, birthDay, password, gender
+//create user controller
+const { User, Cart } = require("../db");
 
 async function createUser(req, res, next) {
   try {
-    const { email, name, lastName, birthDay, password, gender } = req.body;
+    const { email, name, lastName, birthDay, gender } = req.body;
 
-    User.create({ email, name, lastName, birthDay, password, gender, type: "User" });
+    let user = User.create({ email, name, lastName, birthDay, gender, type: "User" });
 
-    return res.status(200).json("user created");
-  } catch (err) {
-    next(err);
+    res.status(200).send({ Msge: "Usuario creado con exito", user });
+  } catch (error) {
+    next(error);
   }
 }
+
 module.exports = { createUser };

@@ -1,8 +1,7 @@
-const { Product, Collection, Size } = require("../db");
+const { Product, Collection } = require("../db");
 
 async function getProductsDataBase() {
   let products = await Product.findAll({
-    limit: 350,
     attributes: [
       "id",
       "productName",
@@ -11,15 +10,12 @@ async function getProductsDataBase() {
       "discount",
       "description",
       "images",
+      "gender"
     ],
     include: [
       {
         model: Collection,
         attributes: ["name"],
-      },
-      {
-        model: Size,
-        attributes: ["number"],
       },
     ],
   });
