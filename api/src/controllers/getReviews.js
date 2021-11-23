@@ -5,11 +5,11 @@ async function getReviews(req, res) {
   try {
     if (id) {
       let reviews = await Reviews.findAll({
-        attributes: ["id", "score", "review", "productId"],
+        attributes: ["id", "score", "review"],
       });
       if (reviews) {
         let reviewsFound = reviews.filter(e => {
-          return e.productId === id;
+          return e.id === id;
         });
         return res.status(200).send(reviewsFound);
       } else {
