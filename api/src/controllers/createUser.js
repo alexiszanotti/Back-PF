@@ -1,14 +1,14 @@
-//email, name, lastName, birthDay, password, gender
-//create user controller
 const { User, Cart } = require("../db");
 
 async function createUser(req, res, next) {
   try {
-    const { email, name, lastName, birthDay, gender } = req.body;
+    const { email, name, lastName, birthDay, gender, CartId } = req.body;
 
-    let user = User.create({ email, name, lastName, birthDay, gender, type: "User" });
+    let cart = await Cart.create({});
+    let user = await User.create({ email, name, lastName, birthDay, gender, type: "User", CartId });
 
-    res.status(200).send({ Msge: "Usuario creado con exito", user });
+    let completeUSer = await user.addCart(cart);
+    res.status(200).send({ Msge: "Usuario creado con exito", completeUSer });
   } catch (error) {
     next(error);
   }
