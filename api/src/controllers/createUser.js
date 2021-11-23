@@ -2,13 +2,13 @@ const { User, Cart } = require("../db");
 
 async function createUser(req, res, next) {
   try {
-    const { email, name, lastName, birthDay, gender, CartId } = req.body;
+    const { email, name, lastName, birthDay, gender } = req.body;
 
     let cart = await Cart.create({});
-    let user = await User.create({ email, name, lastName, birthDay, gender, type: "User", CartId });
+    let user = await User.create({ email, name, lastName, birthDay, gender, type: "User" });
 
-    let completeUSer = await user.addCart(cart);
-    res.status(200).send({ Msge: "Usuario creado con exito", completeUSer });
+    let completeUser = await user.setCart(cart);
+    res.status(200).send({ Msge: "Usuario creado con exito", completeUser });
   } catch (error) {
     next(error);
   }

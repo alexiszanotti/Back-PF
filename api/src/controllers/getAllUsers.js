@@ -1,4 +1,5 @@
-const { User, Product } = require("../db");
+const { User, Product, Cart } = require("../db");
+const { createUser } = require("./createUser");
 
 async function getAllUsers(req, res, next) {
   const { id } = req.body;
@@ -28,6 +29,10 @@ async function getAllUsers(req, res, next) {
           {
             model: Product,
             attributes: ["id", "productName"],
+          },
+          {
+            model: Cart,
+            attributes: ["id"],
           },
         ],
       }).then(users => {

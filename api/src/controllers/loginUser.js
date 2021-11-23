@@ -2,7 +2,6 @@ const { User } = require("../db");
 
 async function loginUser(req, res, next) {
   const { email } = req.body;
-
   try {
     const user = await User.findOne({ where: { email } });
 
