@@ -2,13 +2,13 @@ const { Product, Collection } = require("../db");
 
 async function updateProduct(req, res, next) {
   try {
-    const { id, productName, listingPrice, salePrice, discount, images, description, collection, gender } =
+    const { id, productName, listingPrice, salePrice, discount, images, description, collection, stock } =
       req.body;
 
     const product = await Product.findOne({ where: { id } });
 
     if (!product) return res.status(404).send({ message: "Product not found" });
-    await product.update({ productName, listingPrice, salePrice, discount, images, description, gender });
+    await product.update({ productName, listingPrice, salePrice, discount, images, description, stock });
 
     if (collection) {
       let auxcollection = await Collection.findOrCreate({ where: { name: collection } });
