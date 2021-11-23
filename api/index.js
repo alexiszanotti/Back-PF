@@ -1,5 +1,5 @@
 const server = require("./src/app.js");
-const { conn, Product, Collection, User} = require("./src/db.js");
+const { conn, Product, Collection, User } = require("./src/db.js");
 const adidasInfo = require("./src/parseJson/parsejson.js");
 require("dotenv").config();
 
@@ -34,11 +34,9 @@ const createDB = async () => {
       Discount,
       Images,
       Description,
+      Stock,
       Collection: category,
-      Stock
     } = e;
-
-//sadasdasdasd
 
     await Product.create({
       gender: Gender,
@@ -48,12 +46,12 @@ const createDB = async () => {
       discount: Discount,
       images: Images, //convertir el texto de Images a un array
       description: Description,
-      stock: Stock
+      stock: Stock,
     }).then(async product => {
       await Collection.findOne({ where: { name: category } }).then(collection => {
         product.setCollection(collection);
       });
-    }); 
+    });
   }
   //create admin user for testing
   await User.create({

@@ -34,23 +34,22 @@ module.exports = sequelize => {
         max: 100,
       },
     },
-    //images es un arreglo de strings
     images: {
       type: DataTypes.TEXT,
       allowNull: false,
-      
     },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    stock:{
+    stock: {
       type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
-      defaultValue: 0
-    }
+      defaultValue: 0,
+    },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
-  {
-    timestamps: false;
-  }
 };
