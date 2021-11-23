@@ -10,7 +10,8 @@ async function getProductsDataBase() {
       "discount",
       "description",
       "images",
-      "gender"
+      "gender",
+      "stock"
     ],
     include: [
       {
