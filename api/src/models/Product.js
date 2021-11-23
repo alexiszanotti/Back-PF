@@ -33,18 +33,21 @@ module.exports = sequelize => {
     },
     //images es un arreglo de strings
     images: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.TEXT,
       allowNull: false,
-      defaultValue: [],
     },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
     stock: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
       defaultValue: 0,
+    },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   });
   {
