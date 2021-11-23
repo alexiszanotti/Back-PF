@@ -34,8 +34,8 @@ const createDB = async () => {
       Discount,
       Images,
       Description,
-      Collection: category,
       Stock,
+      Collection: category,
     } = e;
 
     //sadasdasdasd

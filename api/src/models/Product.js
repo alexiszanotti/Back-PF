@@ -14,9 +14,12 @@ module.exports = sequelize => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    gender: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     listingPrice: {
       type: DataTypes.DECIMAL(10, 2), // 10 precision, 2 decimales
-      allowNull: false,
     },
     salePrice: {
       type: DataTypes.DECIMAL(10, 2), // 10 precision, 2 decimales
@@ -31,7 +34,6 @@ module.exports = sequelize => {
         max: 100,
       },
     },
-    //images es un arreglo de strings
     images: {
       type: DataTypes.TEXT,
       allowNull: false,

@@ -57,6 +57,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 const { Product, Favorite, ProductSold, SaveProducts, Cart, Collection, Reviews, User } =
   sequelize.models;
 
+
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 Product.belongsTo(Collection); // El producto pertenece a colecciones
@@ -64,6 +65,7 @@ Collection.hasMany(Product); // las colecciones tiene muchos productos
 
 Product.belongsToMany(User, { through: "user_products" });
 User.belongsToMany(Product, { through: "user_products" });
+
 
 Product.hasMany(SaveProducts); // El producto tiene muchos productos guardados.
 SaveProducts.belongsTo(Product); // El producto guardado  pertenece a producto
