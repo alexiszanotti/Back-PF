@@ -80,8 +80,8 @@ Cart.hasMany(User); // El carrito pertenece a Usuario
 Cart.hasMany(ProductSold); // El carrito tiene muchos productos vendidos
 ProductSold.belongsTo(Cart); // El producto vendido pertenece al carrito
 
-Cart.belongsTo(Product);
-Product.hasMany(Cart); // El carrito tiene muchos productos favoritos
+// Cart.belongsTo(Product);
+// Product.hasMany(Cart); // El carrito tiene muchos productos favoritos
 
 Product.hasMany(ProductSold); // El producto tiene muchos productos vendidos
 ProductSold.belongsTo(Product); // El producto vendido pertenece al producto

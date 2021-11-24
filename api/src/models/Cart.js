@@ -44,5 +44,8 @@ module.exports = sequelize => {
       defaultValue: "PENDING",
       allowNull: false,
     },
+    products: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+    },
   });
 };
