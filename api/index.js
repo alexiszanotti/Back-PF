@@ -8,11 +8,7 @@ conn.sync({ force: true }).then(() => {
     console.log("Espere a que se cree la base de datos..");
     console.time("Se creo la base de datos con exito");
     try {
-<<<<<<< HEAD
       await createDB();
-=======
-      // await createDB();
->>>>>>> 6e0d3836476f310df025b9f7c93cf7986c0291c2
       console.timeEnd("Se creo la base de datos con exito");
       console.log("%s listening at 3001");
     } catch (error) {
