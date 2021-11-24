@@ -1,4 +1,4 @@
-const { Reviews } = require("../db");
+const { Reviews } = require("../../db");
 
 async function postReviews(req, res, next) {
   try {

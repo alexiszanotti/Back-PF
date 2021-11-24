@@ -1,5 +1,5 @@
-const { Collection, Product } = require("../db");
-const { getProductsDataBase } = require("../controllers/getProductsDataBase.js");
+const { Collection, Product } = require("../../db");
+const { getProductsDataBase } = require("../Product/getProductsDataBase");
 
 const gender = async (req, res, next) => {
   try {
