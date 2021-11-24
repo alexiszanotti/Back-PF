@@ -1,4 +1,4 @@
-const { Product, Collection } = require("../db");
+const { Product, Collection } = require("../../db");
 
 async function getProductsDataBase() {
   let products = await Product.findAll({
@@ -11,7 +11,7 @@ async function getProductsDataBase() {
       "description",
       "images",
       "gender",
-      "stock"
+      "stock",
     ],
     include: [
       {

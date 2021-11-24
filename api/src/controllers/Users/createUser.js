@@ -1,4 +1,4 @@
-const { User, Cart } = require("../db");
+const { User, Cart } = require("../../db");
 
 async function createUser(req, res, next) {
   try {

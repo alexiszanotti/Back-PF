@@ -1,5 +1,5 @@
 //add product to favorite
-const { User, Product } = require("../db");
+const { User, Product } = require("../../db");
 
 async function addToFavorite(req, res) {
   try {

@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const { getAllUsers } = require("../controllers/getAllUsers");
-const { createUser } = require("../controllers/createUser");
-const { updateUser } = require("../controllers/updateUser");
-const { loginUser } = require("../controllers/loginUser");
+const { getAllUsers } = require("../controllers/Users/getAllUsers");
+const { createUser } = require("../controllers/Users/createUser");
+const { updateUser } = require("../controllers/Users/updateUser");
+const { loginUser } = require("../controllers/Users/loginUser");
 
 const router = Router();
 

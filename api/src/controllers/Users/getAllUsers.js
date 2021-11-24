@@ -1,4 +1,4 @@
-const { User, Product, Cart } = require("../db");
+const { User, Product, Cart } = require("../../db");
 
 async function getAllUsers(req, res, next) {
   const { id } = req.body;
