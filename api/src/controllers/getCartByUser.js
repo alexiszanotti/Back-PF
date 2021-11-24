@@ -1,13 +1,14 @@
-var validator = require('validator');
+var validator = require("validator");
 const { Cart, Product, User } = require("../db");
 
 async function getCartByUser(req, res, next) {
   try {
     const { userId } = req.body;
-    let aux = validator.isUUID(userId)
+    let aux = validator.isUUID(userId);
     if (aux) {
       let productosDelUsuario = await User.findOne({
-        where: { id: userId }, attributes: [
+        where: { id: userId },
+        attributes: [
           "id",
           "name",
           "lastName",
@@ -21,28 +22,23 @@ async function getCartByUser(req, res, next) {
         ],
 
         include: {
-          model: Cart
-        }
-      })
+          model: Cart,
+        },
+      });
       if (productosDelUsuario) {
-        let aux = Object.values(productosDelUsuario.Cart.products)
+        let aux = Object.values(productosDelUsuario.Cart.products);
 
         if (aux[0] === "Sin productos") {
-
-          return res.status(404).json({ msg: "Este Usuario no tiene Producto En su carrito" })
-
+          return res.status(404).json({ msg: "Este Usuario no tiene Producto En su carrito" });
         } else {
-          return res.status(200).json(productosDelUsuario)
+          return res.status(200).json(productosDelUsuario);
         }
       } else {
-        return res.status(404).json({ msg: "Este Usuario no tiene Existe o no tiene carrito" })
+        return res.status(404).json({ msg: "Este Usuario no tiene Existe o no tiene carrito" });
       }
     } else {
-      return res.status(404).json({ msg: "el userId tiene que ser un uuid valido" })
+      return res.status(404).json({ msg: "el userId tiene que ser un uuid valido" });
     }
-
-
-
   } catch (error) {
     next(error);
   }

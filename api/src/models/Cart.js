@@ -46,7 +46,7 @@ module.exports = sequelize => {
     },
     products: {
       type: DataTypes.ARRAY(DataTypes.JSON),
-      defaultValue: ["Sin productos"]
+      defaultValue: ["Sin productos"],
     },
   });
 };
