@@ -1,4 +1,4 @@
-const { Product, Collection } = require("../db");
+const { Product, Collection } = require("../../db");
 
 async function updateProduct(req, res, next) {
   try {

@@ -1,4 +1,4 @@
-const { Collection } = require("../db");
+const { Collection } = require("../../db");
 
 async function removeCollection(req, res) {
   try {

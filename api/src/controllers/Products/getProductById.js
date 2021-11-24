@@ -1,4 +1,4 @@
-const { Product, Collection, Reviews } = require("../db");
+const { Product, Collection, Reviews } = require("../../db");
 
 const getProductById = async (req, res) => {
   const { id } = req.params;

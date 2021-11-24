@@ -1,4 +1,4 @@
-const { User } = require("../db");
+const { User } = require("../../db");
 
 async function loginUser(req, res, next) {
   const { email } = req.body;

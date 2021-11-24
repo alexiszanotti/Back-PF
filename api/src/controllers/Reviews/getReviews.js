@@ -1,4 +1,4 @@
-const { Reviews } = require("../db");
+const { Reviews } = require("../../db");
 
 async function getReviews(req, res) {
   let { id } = req.query;

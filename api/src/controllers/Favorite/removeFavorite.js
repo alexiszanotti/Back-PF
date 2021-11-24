@@ -1,4 +1,4 @@
-const { User, Product, favorite_product } = require("../db");
+const { User, Product, favorite_product } = require("../../db");
 
 async function removeFavorite(req, res) {
   try {

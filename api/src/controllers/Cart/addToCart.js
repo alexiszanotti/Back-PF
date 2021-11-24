@@ -1,5 +1,5 @@
 var validator = require("validator");
-const { Cart, Product, User } = require("../db");
+const { Cart, Product, User } = require("../../db");
 
 async function addToCart(req, res, next) {
   try {
