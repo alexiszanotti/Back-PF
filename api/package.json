@@ -23,9 +23,10 @@
     "ioredis": "^4.19.2",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.6",
     "pg": "^8.5.1",
     "sequelize": "^6.3.5",
-    "nodemon": "^2.0.6"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
