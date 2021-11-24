@@ -3,7 +3,7 @@ const { Cart, Product, User } = require("../../db");
 
 async function getCartByUser(req, res, next) {
   try {
-    const { userId } = req.body;
+    const { userId } = req.query;
     let aux = validator.isUUID(userId);
     if (aux) {
       let productosDelUsuario = await User.findOne({
