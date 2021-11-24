@@ -2,7 +2,7 @@ const { User } = require("../../db");
 
 async function getFavorite(req, res) {
   try {
-    const { userId } = req.body;
+    const { userId } = req.query;
     const user2 = await User.findOne({
       where: { id: userId },
     });
