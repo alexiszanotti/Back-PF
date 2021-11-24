@@ -19,15 +19,15 @@ module.exports = sequelize => {
       allowNull: false,
     },
     listingPrice: {
-      type: DataTypes.DECIMAL(10, 2), // 10 precision, 2 decimales
+      type: DataTypes.INTEGER, // 10 precision, 2 decimales
     },
     salePrice: {
-      type: DataTypes.DECIMAL(10, 2), // 10 precision, 2 decimales
+      type: DataTypes.INTEGER, // 10 precision, 2 decimales
       allowNull: false,
     },
     //crear descuento con limite entre 0 y 100
     discount: {
-      type: DataTypes.DECIMAL(10, 2), // 10 precision, 2 decimales
+      type: DataTypes.INTEGER, // 10 precision, 2 decimales
       allowNull: false,
       validate: {
         min: 0,
@@ -43,7 +43,7 @@ module.exports = sequelize => {
       allowNull: false,
     },
     stock: {
-      type: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
     },
@@ -52,7 +52,4 @@ module.exports = sequelize => {
       allowNull: false,
     },
   });
-  {
-    timestamps: false;
-  }
 };

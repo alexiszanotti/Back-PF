@@ -1,29 +1,24 @@
-//add to cart
-const { User, Cart, Product } = require("../db");
+//add product a to cart
+const { Cart, Product } = require("../db");
 
-async function addToCart(req, res) {
+async function addToCart(req, res, next) {
   try {
-    const { userId, productId, cartId } = req.body;
+    const { cartId, productId } = req.body;
 
-    const user = await User.findOne({
-      where: { id: userId },
-      include: [{ model: Cart }],
-    });
-    const product = await Product.findOne({
-      where: { id: productId },
-    });
-    const cart = await Cart.findOne({
+    let cart = await Cart.findAll({
       where: { id: cartId },
     });
-    if (user.cartId === null) {
-      await user.createCart();
-    } else {
-      await cart.addProduct(product);
-    }
+    let product = await Product.findOne({
+      where: { id: productId },
+      attributes: ["id", "productName", "salePrice", "images"],
+      include: { model: Cart },
+    });
 
-    res.status(200).send("Product added to cart");
+    let cartProduct = await cart[0].setProduct(product);
+
+    res.status(200).json(cartProduct);
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 }
 
