@@ -13,6 +13,7 @@ async function removeProductsCart(req, res, next) {
         id: productId,
       },
     });
+    console.log(product);
     const productsInCart = await ProductsInCart.findOne({
       where: {
         CartId: cart.id,
