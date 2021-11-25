@@ -23,6 +23,12 @@ async function getAllUsers(req, res, next) {
           "telephone",
           "address",
           "cp",
+          "document",
+          "location",
+          "province",
+          "floor",
+          "department",
+          "number"
         ],
         include: [
           {
