@@ -26,10 +26,6 @@ async function getAllUsers(req, res, next) {
         ],
         include: [
           {
-            model: Product,
-            attributes: ["id", "productName"],
-          },
-          {
             model: Cart,
             attributes: ["id"],
           },
