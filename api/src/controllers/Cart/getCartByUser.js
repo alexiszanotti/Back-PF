@@ -1,39 +1,29 @@
-var validator = require("validator");
-const { Cart, ProductsInCart, User } = require("../../db");
+const { Cart, User } = require("../../db");
 
 async function getCartByUser(req, res, next) {
   const { userId } = req.query;
   try {
-
-    let aux = validator.isUUID(userId);
-    if (aux) {
-      let productosDelUsuario = await User.findOne({
-        where: { id: userId },
-        attributes: [
-          "id",
-          "name",
-        ],
-        include:
-          {
-            model : Cart,
-                
-          }
-  });
-
-    let aux2 = Cart.getProductsInCarts({where : {userId : productosDelUsuario.cardId}})
-
-  if (productosDelUsuario &&  aux2) {
-    /*  let aux = Object.values(productosDelUsuario); */
-
-    return res.status(200).json(aux2);
-
-  } else {
-    return res.status(404).json({ msg: "el userId tiene que ser un uuid valido" });
-  }
-}
+    const user = await User.findOne({
+      where: {
+        id: userId,
+      },
+      attributes: ["id", "name"],
+      include: [
+        {
+          model: Cart,
+          attributes: ["id"],
+        },
+      ],
+    });
+    if (!user) {
+      return res.status(404).send({
+        message: "No se encontraron usuarios con ese ID.",
+      });
+    }
+    return res.status(200).send(user);
   } catch (error) {
-  next(error);
-}
+    next(error);
+  }
 }
 
 module.exports = { getCartByUser };
