@@ -1,26 +1,34 @@
-const { Cart, User } = require("../../db");
+const { Cart, ProductsInCart, Product } = require("../../db");
 
 async function getCartByUser(req, res, next) {
-  const { userId } = req.query;
+  const { cartId } = req.query;
   try {
-    const user = await User.findOne({
+    const cart = await Cart.findOne({
       where: {
-        id: userId,
+        id: cartId,
       },
-      attributes: ["id", "name"],
+      attributes: ["id"],
       include: [
         {
-          model: Cart,
-          attributes: ["id"],
+          model: ProductsInCart,
+          attributes: {
+            exclude: ["id", "price", "quantity", "productName", "CartId"],
+          },
+          include: [
+            {
+              model: Product,
+              attributes: ["id", "productName", "salePrice", "images", "stock"],
+            },
+          ],
         },
       ],
     });
-    if (!user) {
+    if (!cart) {
       return res.status(404).send({
         message: "No se encontraron usuarios con ese ID.",
       });
     }
-    return res.status(200).send(user);
+    return res.status(200).send(cart);
   } catch (error) {
     next(error);
   }
