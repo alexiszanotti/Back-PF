@@ -1,49 +1,53 @@
 var validator = require("validator");
-const { Cart, Product, User } = require("../../db");
+const { Cart, Product, ProductsInCart, User } = require("../../db");
 
 async function addToCart(req, res, next) {
+  const { cartId, productId } = req.body;
   try {
-    const { cartId, productId, userId } = req.body;
 
-    let productosDelUsuario = await User.findOne({
-      where: { id: userId },
-      attributes: ["email"],
-      include: {
-        model: Cart,
-        attributes: ["id", "products"],
-      },
+    let carritoDelUsuario = await Cart.findOne({
+      where: { id: cartId },
     });
-    let aux = Object.values(productosDelUsuario.Cart.products);
+    let aux1 = validator.isUUID(carritoDelUsuario.id);
 
-    if (aux[0] === "Sin productos") {
+
+    if (aux1) {
       let product = await Product.findOne({
-        raw: true,
         where: { id: productId },
         attributes: ["id", "productName", "salePrice", "images", "stock"],
       });
-      let aux = validator.isUUID(product.id);
-      if (aux) {
-        let cartProduct = await Cart.update({ products: [product] }, { where: { id: cartId } });
-        return res.status(200).json({ Msge: "Producto agregado con exito" });
+      let aux2 = validator.isUUID(product.id);
+
+      if (aux2) {
+
+        let aux5 = await ProductsInCart.findAll({
+          where: {
+            productId: product.id,
+            CartId: cartId
+          }
+        })
+        if (aux5.length > 0) {
+          return res.status(400).json({ MSG: "este producto ya esta agregado al carrito" })
+        } else if (aux5.length === 0) {
+          let cartProduct = await carritoDelUsuario.createProductsInCart({
+            productId: product.id,
+            price: product.salePrice,
+            dateOfPurchase: "25-11-2021",
+            discount: 10,
+            amount: 1,
+            CartId: carritoDelUsuario.id
+          });
+
+          return res.status(200).json(cartProduct);
+
+        }
+
+      } else {
+        return res.status(404).json({ msg: "ese id de producto no pertenece a ningun producto" })
+
       }
     } else {
-      let productos = productosDelUsuario.Cart.products;
-      var product = await Product.findOne({
-        where: { id: productId },
-        attributes: ["id", "productName", "salePrice", "images", "stock"],
-      });
-      let aux = validator.isUUID(product.id);
-      if (aux) {
-        let productoYaExistente = productos.filter(e => e.id === product.id);
-
-        if (productoYaExistente.length > 0) {
-          return res.status(404).json({ msg: "este Producto Ya esa en el carrito" });
-        } else {
-          productos.push(product);
-          let cartProduct = await Cart.update({ products: productos }, { where: { id: cartId } });
-          return res.status(200).json({ msg: "Producto agregado al carrito" });
-        }
-      }
+      return res.status(404).json({ msg: "ese cartid no tiene un carrito asociado" })
     }
   } catch (error) {
     next(error);

@@ -31,7 +31,7 @@ async function getAllUsers(req, res, next) {
           },
           {
             model: Cart,
-            attributes: ["id", "products"],
+            attributes: ["id"],
           },
         ],
       }).then(users => {
