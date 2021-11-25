@@ -14,15 +14,22 @@ async function getAllUsers(req, res, next) {
       const users = await User.findAll({
         attributes: [
           "id",
+          "email",
           "name",
           "lastName",
-          "email",
-          "type",
           "birthDay",
+          "password",
           "gender",
-          "telephone",
+          "type",
           "address",
           "cp",
+          "telephone",
+          "number",
+          "location",
+          "document",
+          "province",
+          "floor",
+          "department",
         ],
         include: [
           {
