@@ -1,21 +1,56 @@
-const { Reviews } = require("../../db");
+const { Reviews, Product, Cart } = require("../../db");
 
 async function postReviews(req, res, next) {
-  try {
-    let { review, score, productId } = req.body;
+  const { review, score, productId, userId } = req.body;
 
-    let reviewCreate = await Reviews.create({
-      review: review,
-      score: score,
-      productId: productId,
+  try {
+    const cart = await Cart.findOne({
+      where: {
+        status: "COMPLETED",
+        userId: userId,
+      },
+      include: [
+        {
+          model: Product,
+          where: {
+            id: productId,
+          },
+        },
+      ],
     });
-    if (reviewCreate) {
-      return res.status(200).send(reviewCreate);
-    } else {
-      return res.status(404).send({ msg: "no se creoo compa" });
+
+    if (!cart) {
+      return res.status(400).json({
+        message: "Carrito no encontrado",
+      });
     }
+
+    const reviewExist = await Reviews.findOne({
+      where: {
+        productId: productId,
+        userId: userId,
+      },
+    });
+
+    if (reviewExist) {
+      return res.status(400).json({
+        message: "Ya has realizado una reseña de este producto",
+      });
+    }
+
+    const reviewCreated = await Reviews.create({
+      review,
+      score,
+      productId,
+      userId,
+    });
+
+    return res.status(201).json({
+      message: "Reseña creada",
+      reviewCreated,
+    });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 }
 
