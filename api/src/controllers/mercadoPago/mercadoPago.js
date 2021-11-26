@@ -39,7 +39,6 @@ async function Pago(req, res, next) {
     if (cart.id !== cartId && cart.status !== "PENDING") {
       return res.status(404).json({ message: 'No existe orden en estado "CART"' });
     } else {
-      cart.status = "PROCESSING";
       let preference = {
         items: cart.ProductsInCarts?.map(e => {
           return {
