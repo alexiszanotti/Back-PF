@@ -1,4 +1,4 @@
-const { User, Product, Cart } = require("../../db");
+const { User, Cart } = require("../../db");
 
 async function getAllUsers(req, res, next) {
   const { id } = req.body;
@@ -18,7 +18,6 @@ async function getAllUsers(req, res, next) {
           "name",
           "lastName",
           "birthDay",
-          "password",
           "gender",
           "type",
           "address",
@@ -37,9 +36,8 @@ async function getAllUsers(req, res, next) {
             attributes: ["id"],
           },
         ],
-      }).then(users => {
-        res.status(200).send(users);
       });
+      return res.status(200).send(users);
     }
   } catch (error) {
     next(error);
