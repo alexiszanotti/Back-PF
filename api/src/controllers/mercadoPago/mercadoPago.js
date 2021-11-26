@@ -15,7 +15,7 @@ async function Pago(req, res, next) {
       });
     }
 
-    const order = await Cart.findOne({
+    const cart = await Cart.findOne({
       where: {
         id: cartId,
         status: "PENDING",
@@ -35,12 +35,13 @@ async function Pago(req, res, next) {
         },
       ],
     });
-    console.log(order);
-    if (order.id !== cartId && order.status !== "PENDING") {
+
+    if (cart.id !== cartId && cart.status !== "PENDING") {
       return res.status(404).json({ message: 'No existe orden en estado "CART"' });
     } else {
+      cart.status = "PROCESSING";
       let preference = {
-        items: order.ProductsInCarts?.map(e => {
+        items: cart.ProductsInCarts?.map(e => {
           return {
             title: e.product.productName,
             unit_price: e.product.salePrice,
@@ -57,8 +58,6 @@ async function Pago(req, res, next) {
         external_reference: "Prueba",
       };
 
-      // let aux = await mercadopago.preferences.create(preference);
-      // return res.status(200).json(aux);
       mercadopago.preferences
         .create(preference)
         .then(function (respuesta) {
