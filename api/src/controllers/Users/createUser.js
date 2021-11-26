@@ -8,7 +8,7 @@ async function createUser(req, res, next) {
     let user = await User.create({ email, name, lastName, birthDay, gender, type: "User" });
 
     let completeUser = await user.setCart(cart);
-    res.status(200).send({ Msge: "Usuario creado con exito", user });
+    res.status(200).send({ Msge: "Usuario creado con exito", completeUser });
   } catch (error) {
     next(error);
   }

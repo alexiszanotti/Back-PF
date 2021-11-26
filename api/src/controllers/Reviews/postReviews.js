@@ -2,18 +2,16 @@ const { Reviews } = require("../../db");
 
 async function postReviews(req, res, next) {
   try {
-    let { review, score, productId } = req.body;
+    const { review, score } = req.body;
+    const { productId } = req.params;
 
-    let reviewCreate = await Reviews.create({
-      review: review,
-      score: score,
-      productId: productId,
+    const newReview = await Reviews.create({
+      review,
+      score,
+      productId,
     });
-    if (reviewCreate) {
-      return res.status(200).send(reviewCreate);
-    } else {
-      return res.status(404).send({ msg: "no se creoo compa" });
-    }
+
+    res.status(201).json(newReview);
   } catch (error) {
     console.log(error);
   }
