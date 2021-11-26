@@ -74,28 +74,19 @@ SaveProducts.belongsTo(Product); // El producto guardado  pertenece a producto
 User.hasMany(SaveProducts); // El usuario tiene muchos productos guardados
 SaveProducts.belongsTo(User); // El producto guardado  pertenece a Usuario
 
-
-
-
 /////////////////////////////////////////////////////////////////////////////
 
-ProductsInCart.belongsTo(Cart) // ProductsInCart pertenece a Cart
-Cart.hasMany(ProductsInCart)    // Cart Tiene muchas ProductsInCart
+ProductsInCart.belongsTo(Cart); // ProductsInCart pertenece a Cart
+Cart.hasMany(ProductsInCart); // Cart Tiene muchas ProductsInCart
 
+ProductsInCart.belongsTo(Product); // Product pertenece a ProductsInCart
+Product.hasMany(ProductsInCart); // ProductsInCart Tiene muchas Product
 
-ProductsInCart.belongsTo(Product)  // Product pertenece a ProductsInCart
-Product.hasMany(ProductsInCart) // ProductsInCart Tiene muchas Product
+User.belongsTo(Cart); //
+Cart.hasMany(User); //
 
-
-User.belongsTo(Cart);  // 
-Cart.hasMany(User);  // 
-
-
-//////////////////////////////////////////////////////////////////////////////
-
-
-/* Reviews.belongsTo(ProductSold); 
-ProductSold.hasMany(Reviews);  */
+Reviews.belongsTo(ProductsInCart);
+ProductsInCart.hasMany(Reviews);
 
 Favorite.belongsTo(User);
 User.hasMany(Favorite);

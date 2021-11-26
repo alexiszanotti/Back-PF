@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router();
-const {mercadoPago} = require("../controllers/mercadoPago/mercadoPago");
+const { Pago } = require("../controllers/mercadoPago/mercadoPago");
 
+router.get("/", Pago);
 
-router.get("/", mercadoPago);
+module.exports = router;
