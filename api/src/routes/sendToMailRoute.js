@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const router = Router();
 const {sendToMail} = require("../controllers/mail/sendMail");
+const router = Router();
 
 
 router.post("/", sendToMail);
