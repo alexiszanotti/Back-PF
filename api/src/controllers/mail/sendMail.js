@@ -34,7 +34,9 @@ async function sendToMail(req, res, next) {
     return res.status(200).send(msgSend)
     
   } catch (error) {
+
     console.log(error)
+    
   }
 }
 
