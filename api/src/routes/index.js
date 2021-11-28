@@ -8,6 +8,9 @@ const favoriteRoute = require("./favoriteRoute");
 const cartRoute = require("./cartRoute");
 const mercadoPagoRoute = require("./mercadoPagoRoute");
 const checkoutRoute = require("./checkoutRoute");
+const sendToMailRoute = require("./sendToMailRoute");
+const orderRoute = require("./orderRoute");
+
 
 const router = Router();
 router.use(express.urlencoded({ extended: true, limit: "50mb" }));
@@ -21,5 +24,8 @@ router.use("/favorite", favoriteRoute);
 router.use("/cart", cartRoute);
 router.use("/mercadoPago", mercadoPagoRoute);
 router.use("/checkout", checkoutRoute);
+router.use("/mail", sendToMailRoute);
+router.use("/order", orderRoute);
+
 
 module.exports = router;
