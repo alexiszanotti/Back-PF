@@ -1,7 +1,7 @@
 const { Cart, Product, ProductsInCart, User } = require("../../db");
 
 async function Checkout(req, res, next) {
-    const { cartId, InfoCart, InfoProductsInCart } = req.body;
+    const { cartId, InfoCart, } = req.body;
     try {
         if (cartId && InfoCart) {
 
@@ -16,7 +16,7 @@ async function Checkout(req, res, next) {
                     },
                 ],
             });
-            if (auxproductsInCart && cart) {
+            if (auxproductsInCart ) {
                 for (let i = 0; i < auxproductsInCart.length; i++) {
                     const x = await ProductsInCart.update(
                         {
