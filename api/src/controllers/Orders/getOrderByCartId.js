@@ -33,7 +33,8 @@ async function getOrderByCartId(req, res, next) {
       ],
     });
 
-    res.status(200).send(user);
+    console.log(user, "CONCHUDOOOOOOOOOO")
+    return res.status(200).send(user);
   } catch (error) {
     return next(error);
   }

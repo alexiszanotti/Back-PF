@@ -9,7 +9,7 @@ async function updateStatusOrder(req, res, next) {
     if (!cartId || !status) {
       res.status(400).send({ Msge: "Fata algun parametro" });
     }
-
+    console.log(cartId, status, "probando")
     const cart = await Cart.update(
       { status: status },
       {
