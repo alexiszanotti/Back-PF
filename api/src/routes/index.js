@@ -7,6 +7,7 @@ const reviewsRoute = require("./reviewsRoute");
 const favoriteRoute = require("./favoriteRoute");
 const cartRoute = require("./cartRoute");
 const mercadoPagoRoute = require("./mercadoPagoRoute");
+const sendToMailRoute = require("./sendToMailRoute");
 const orderRoute = require("./orderRoute");
 
 const router = Router();
@@ -20,6 +21,7 @@ router.use("/reviews", reviewsRoute);
 router.use("/favorite", favoriteRoute);
 router.use("/cart", cartRoute);
 router.use("/mercadoPago", mercadoPagoRoute);
+router.use("/mail", sendToMailRoute);
 router.use("/order", orderRoute);
 
 module.exports = router;
