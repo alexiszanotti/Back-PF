@@ -1,10 +1,10 @@
 const { PROD_ACCESS_TOKEN } = process.env;
 const { Cart, Product, ProductsInCart } = require("../../db");
 
-const mercadopago = require("mercadopago");
+/* const mercadopago = require("mercadopago");
 mercadopago.configure({
   access_token: PROD_ACCESS_TOKEN,
-});
+}); */
 
 async function Pago(req, res, next) {
   try {
@@ -40,7 +40,7 @@ async function Pago(req, res, next) {
       return res.status(404).json({ message: 'No existe orden en estado "CART"' });
     } else {
       let preference = {
-        items: cart.ProductsInCarts?.map(e => {
+        items: cart.ProductsInCarts.map(e => {
           return {
             title: e.product.productName,
             unit_price: e.product.salePrice,
