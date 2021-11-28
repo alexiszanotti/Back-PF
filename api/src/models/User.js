@@ -25,7 +25,7 @@ module.exports = sequelize => {
       type: DataTypes.ENUM("Male", "Female", "Other"),
     },
     type: {
-      type: DataTypes.ENUM("Admin", "User"),
+      type: DataTypes.ENUM("Admin", "User","Locked"),
       allowNull: false,
     },
     email: {
