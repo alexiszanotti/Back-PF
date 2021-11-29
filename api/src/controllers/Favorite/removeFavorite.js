@@ -1,22 +1,17 @@
-const { User, Product, favorite_product } = require("../../db");
+const { User, Product } = require("../../db");
 
 async function removeFavorite(req, res) {
   try {
     const { userId, productId } = req.body;
 
-    const projects = await favorite_product.destroy(
-      {
-        productId: "",
-      },
-      {
-        where: {
-          productId: productId,
-          userId: userId,
-        },
-      }
-    );
+    const user = await User.findOne({ where: { id: userId } });
+    const product = await Product.findOne({ where: { id: productId } });
 
-    return res.status(200).send(projects);
+    await user.removeProduct(product);
+
+    res.status(200).json({
+      message: "Producto eliminado de favoritos",
+    });
   } catch (error) {
     console.log(error);
   }

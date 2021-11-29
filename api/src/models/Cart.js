@@ -12,7 +12,7 @@ module.exports = sequelize => {
     paymentMethod: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: "Mercado Pago",
     },
     dateOfPurchase: {
       type: DataTypes.STRING,

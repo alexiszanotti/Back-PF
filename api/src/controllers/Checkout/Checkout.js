@@ -36,7 +36,6 @@ async function Checkout(req, res, next) {
             dateOfPurchase: InfoCart[0].dateOfPurchase,
             confirmationDate: InfoCart[0].confirmationDate,
             dateCancellation: InfoCart[0].dateCancellation,
-
             status: "PROCESSING",
           },
           {
