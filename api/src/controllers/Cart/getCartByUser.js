@@ -1,4 +1,4 @@
-const { Cart, ProductsInCart, Product } = require("../../db");
+const { Cart, ProductsInCart, Product, Order } = require("../../db");
 
 async function getCartByUser(req, res, next) {
   const { cartId } = req.query;
@@ -7,7 +7,7 @@ async function getCartByUser(req, res, next) {
       where: {
         id: cartId,
       },
-      attributes: ["id"],
+      attributes: ["id", "status"],
       include: [
         {
           model: ProductsInCart,

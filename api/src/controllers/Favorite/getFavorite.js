@@ -1,23 +1,21 @@
-const { User } = require("../../db");
+const { User, Product } = require("../../db");
 
-async function getFavorite(req, res) {
+async function getFavorite(req, res, next) {
   try {
     const { userId } = req.query;
-    const user2 = await User.findOne({
+    const user = await User.findOne({
       where: { id: userId },
+      attributes: ["id"],
+      include: [
+        {
+          model: Product,
+          attributes: ["id", "productName", "salePrice", "images"],
+        },
+      ],
     });
-    if (user2) {
-      const projects = await user2.getProducts();
-      if (projects.length === 0) {
-        return res.status(400).send({ msg: "este usuario no tiene productos" });
-      } else {
-        return res.status(200).send(projects);
-      }
-    } else {
-      return res.status(200).send({ msg: "no existe este id de usuario" });
-    }
+    res.status(200).json(user);
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 }
 
