@@ -12,29 +12,9 @@ module.exports = sequelize => {
     paymentMethod: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: "",
+      defaultValue: "Mercado Pago",
     },
     dateOfPurchase: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "",
-    },
-    confirmationDate: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "",
-    },
-    dateCancellation: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "",
-    },
-    dispatchDate: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "",
-    },
-    dateOfDelivery: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: "",
