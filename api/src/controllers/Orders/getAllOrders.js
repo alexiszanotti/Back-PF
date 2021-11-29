@@ -1,14 +1,13 @@
 // get status of orders
-const { Cart, ProductsInCart, Product } = require("../../db");
+const { Cart, ProductsInCart, Product, Order } = require("../../db");
 
 async function getAllOrders(req, res, next) {
   try {
     const cart = await Cart.findAll({
-      attributes: {
-        exclude: ["confirmationDate", "dateCancellation", "dateOfDelivery"],
-      },
       include: [
         {
+          model: Order,
+
           model: ProductsInCart,
           attributes: {
             exclude: [, "productId", "CartId"],

@@ -29,16 +29,7 @@ module.exports = sequelize => {
       allowNull: false,
       defaultValue: "",
     },
-    dispatchDate: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "",
-    },
-    dateOfDelivery: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: "",
-    },
+
     status: {
       type: DataTypes.ENUM("PENDING", "PROCESSING", "CANCELED", "COMPLETED"),
       defaultValue: "PENDING",
