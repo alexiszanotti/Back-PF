@@ -1,4 +1,4 @@
-const { Cart, ProductsInCart, Product, Order } = require("../../db");
+const { Cart, ProductsInCart, Product } = require("../../db");
 
 async function getCartByUser(req, res, next) {
   const { cartId } = req.query;

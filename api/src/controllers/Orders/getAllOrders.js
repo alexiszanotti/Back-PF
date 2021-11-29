@@ -4,20 +4,19 @@ const { Cart, ProductsInCart, Product, Order } = require("../../db");
 async function getAllOrders(req, res, next) {
   try {
     const cart = await Cart.findAll({
+      attributes: {
+        exclude: ["orderId"],
+      },
       include: [
         {
           model: Order,
-
+        },
+        {
           model: ProductsInCart,
+
           attributes: {
             exclude: [, "productId", "CartId"],
           },
-          include: [
-            {
-              model: Product,
-              attributes: ["id", "salePrice", "productName"],
-            },
-          ],
         },
       ],
     });

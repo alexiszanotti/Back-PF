@@ -14,6 +14,8 @@ async function getInfoPago(req, res, next) {
       payment_status: status,
       CartId: external_reference,
     });
+
+    cart.setOrder(order);
     res.redirect(`http://localhost:3000/`);
   } catch (error) {
     next(error);
