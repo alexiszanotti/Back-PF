@@ -18,22 +18,13 @@ module.exports = sequelize => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    listingPrice: {
-      type: DataTypes.INTEGER,
-    },
+
     salePrice: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     //crear descuento con limite entre 0 y 100
-    discount: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        min: 0,
-        max: 100,
-      },
-    },
+
     images: {
       type: DataTypes.TEXT,
       allowNull: false,
