@@ -9,7 +9,7 @@ mercadopago.configure({
 
 async function Pago(req, res) {
   try {
-    const { cartId } = req.query;
+    const { cartId } = req.body;
 
     if (!cartId) {
       return res.status(404).json({
@@ -68,7 +68,7 @@ async function Pago(req, res) {
           const redireccion = respuesta.body.init_point;
           console.log(global.id)
           console.log(redireccion)
-          res.send(global.id);
+          res.status(200).json(redireccion);
         })
         .catch(function (error) {
           error;

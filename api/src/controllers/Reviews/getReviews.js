@@ -1,44 +1,62 @@
 const { Reviews } = require("../../db");
 
-async function getReviews(req, res) {
+async function getReviews(req, res, next) {
   const { userId, productId } = req.body;
+  console.log(userId, productId, "probando");
   try {
-    //Ver todas las revies de un producto
-    if (productId) {
-      const reviews = await Reviews.findAll({
-        where: {
-          productId: productId,
-        },
-      });
-      res.status(200).send(reviews);
-    }
-
-    //Ver las reviews de un usuario
-    if (userId) {
-      const reviews = await Reviews.findAll({
-        where: {
-          userId: userId,
-        },
-      });
-      res.status(200).send(reviews);
-    }
-
-    //Ver las reviews de un usuario y un producto
-    if (userId && productId) {
+    if(userId && !productId) {
+      console.log("if 1")
+        const reviews = await Reviews.findAll({
+          where: {
+            userId: userId,
+          },
+        });
+        if(reviews.length > 0){
+          console.log("if 2")
+          return res.status(200).send(reviews);
+        }else{
+          return res.status(404).send({message: 'Review not found user'})
+        }
+    }else if(productId && !userId) {
+      console.log("if 3")
+        const reviews = await Reviews.findAll({
+          where: {
+            productId: productId,
+          },
+        });
+        if(reviews.length > 0){
+          console.log("if 4")
+          return res.status(200).send(reviews);
+        } else{
+          return res.status(404).send({message: 'Review not found product'})
+        }
+    }else if(userId && productId){
+      console.log("if 5")
       const reviews = await Reviews.findOne({
         where: {
           userId: userId,
           productId: productId,
         },
       });
-      res.status(200).send(reviews);
-    }
+      if(reviews.length > 0){
+        console.log("if 6")
+        return res.status(200).send(reviews);
+      } else{
+        return res.status(404).send({message: 'Review not found product and user'})
+      }
+    }else{
+      const reviews = await Reviews.findAll();
+      if(reviews.length > 0){
+        console.log("if 7")
 
+      return  res.status(200).send(reviews);
+      }
+
+    }
     //Ver todas las reviews
-    const reviews = await Reviews.findAll();
-    res.status(200).send(reviews);
   } catch (error) {
-    console.log(error);
+    next(error);
+    
   }
 }
 
