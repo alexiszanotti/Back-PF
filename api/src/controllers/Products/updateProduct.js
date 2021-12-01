@@ -2,7 +2,7 @@ const { Product, Collection } = require("../../db");
 
 async function updateProduct(req, res, next) {
   try {
-    const { id, productName, salePrice, images, description, collection, stock } = req.body;
+    const { id, productName, salePrice, images, description, collection, stock, gender } = req.body;
 
     const product = await Product.findOne({ where: { id } });
 
@@ -13,6 +13,7 @@ async function updateProduct(req, res, next) {
       images,
       description,
       stock,
+      gender,
     });
 
     if (collection) {
