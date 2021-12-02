@@ -25,7 +25,7 @@ async function getOrderByStatus(req, res, next) {
         ],
       });
       if (cart2) {
-        return res.status(200).json(cart2)
+        return res.status(200).json(cart2);
       }
     } else {
       if (
