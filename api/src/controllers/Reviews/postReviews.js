@@ -29,11 +29,6 @@ async function postReviews(req, res, next) {
           }
         })
         let reseñaCreada = await Reviews.create({score: score, review: review})
-        let reviewDb = Reviews.findAll({
-          where: {
-            id: reseñaCreada.id
-          }
-        })
         let aux = await productoCart.setReviews(reseñaCreada) 
         return res.status(200).send(aux)
       } else {
