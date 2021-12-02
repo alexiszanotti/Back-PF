@@ -1,5 +1,5 @@
 // get status of orders
-const { Cart, ProductsInCart, Product, Order } = require("../../db");
+const { Cart, ProductsInCart, Order } = require("../../db");
 
 async function getAllOrders(req, res, next) {
   try {

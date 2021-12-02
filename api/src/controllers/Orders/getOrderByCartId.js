@@ -1,39 +1,19 @@
-const { Cart, ProductsInCart, Product, User } = require("../../db");
+const { CartSold } = require("../../db");
 
 async function getOrderByCartId(req, res, next) {
-  const { CartId } = req.query;
+  const { userId } = req.query;
 
   try {
-    const user = await User.findOne({
+    const cart = await CartSold.findAll({
       where: {
-        CartId,
+        userId: userId,
       },
-      attributes: ["id", "CartId", "email", "name"],
-      include: [
-        {
-          model: Cart,
-          attributes: {
-            exclude: ["confirmationDate", "dateCancellation", "dateOfDelivery"],
-          },
-          include: [
-            {
-              model: ProductsInCart,
-              attributes: {
-                exclude: [, "productId", "CartId"],
-              },
-              include: [
-                {
-                  model: Product,
-                  attributes: ["id", "salePrice", "productName", "images"],
-                },
-              ],
-            },
-          ],
-        },
-      ],
     });
-
-    res.status(200).send(user);
+    if (cart) {
+      res.status(200).send(cart);
+    } else {
+      res.status(404).send("No cart found");
+    }
   } catch (error) {
     return next(error);
   }
