@@ -26,24 +26,12 @@ const createDB = async () => {
     });
   });
   for (let e of adidasInfo) {
-    const {
-      Gender,
-      ProductName,
-      ListingPrice,
-      SalePrice,
-      Discount,
-      Images,
-      Description,
-      Stock,
-      Collection: category,
-    } = e;
+    const { Gender, ProductName, SalePrice, Images, Description, Stock, Collection: category } = e;
 
     await Product.create({
       gender: Gender,
       productName: ProductName,
-      listingPrice: ListingPrice,
       salePrice: SalePrice,
-      discount: Discount,
       images: Images, //convertir el texto de Images a un array
       description: Description,
       stock: Stock,

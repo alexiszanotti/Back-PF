@@ -2,15 +2,14 @@ const { Product, Collection } = require("../../db");
 
 async function createProduct(req, res, next) {
   try {
-    const { productName, listingPrice, salePrice, discount, images, description, collection } =
-      req.body;
+    const { productName, salePrice, images, description, collection, stock, gender } = req.body;
     const newProduct = await Product.create({
       productName,
-      listingPrice,
       salePrice,
-      discount,
       images,
       description,
+      stock,
+      gender,
     });
     const newCollection = await Collection.findOrCreate({ where: { name: collection } });
 

@@ -1,6 +1,6 @@
 const { User, Product } = require("../../db");
 
-async function removeFavorite(req, res) {
+async function removeFavorite(req, res, next) {
   try {
     const { userId, productId } = req.body;
 
@@ -9,11 +9,9 @@ async function removeFavorite(req, res) {
 
     await user.removeProduct(product);
 
-    res.status(200).json({
-      message: "Producto eliminado de favoritos",
-    });
+    res.status(200).send({ Mge: "Producto eliminado de favoritos" });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 }
 

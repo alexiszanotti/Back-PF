@@ -25,7 +25,7 @@ module.exports = sequelize => {
       type: DataTypes.ENUM("Male", "Female", "Other"),
     },
     type: {
-      type: DataTypes.ENUM("Admin", "User","Locked"),
+      type: DataTypes.ENUM("Admin", "User", "Locked"),
       allowNull: false,
     },
     email: {
@@ -43,7 +43,7 @@ module.exports = sequelize => {
       type: DataTypes.STRING,
     },
     telephone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     number: {
       type: DataTypes.INTEGER,

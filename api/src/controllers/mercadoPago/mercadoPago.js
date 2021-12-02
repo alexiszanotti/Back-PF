@@ -66,9 +66,9 @@ async function Pago(req, res) {
         .then(function (respuesta) {
           global.id = respuesta.body.id;
           const redireccion = respuesta.body.init_point;
-          console.log(global.id)
-          console.log(redireccion)
-          res.status(200).json(redireccion);
+          console.log(global.id);
+          console.log(redireccion);
+          res.send(global.id);
         })
         .catch(function (error) {
           error;
