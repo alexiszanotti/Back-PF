@@ -7,7 +7,6 @@ async function postReviews(req, res, next) {
     if (cartId) {
       const busqueda = await Cart.findAll({
         where: {
-          status: "COMPLETED",
           id: cartId,
         },
         include: [
@@ -24,7 +23,6 @@ async function postReviews(req, res, next) {
           },
         ],
       });
-
       if (busqueda.length > 0) {
         let productoCart = await ProductsInCart.findOne({
           where: {
