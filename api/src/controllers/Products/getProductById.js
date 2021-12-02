@@ -1,18 +1,33 @@
-const { Product, Collection, Reviews } = require("../../db");
+const { Product, Collection, ProductsInCart, Reviews } = require("../../db");
 
 const getProductById = async (req, res) => {
-  const { id } = req.params;
-
   try {
-    if (id) {
-      let productFound = await Product.findOne({
-        where: { id },
-        include: {
-          model: Collection,
-          Reviews,
-        },
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        message: "Bad request",
       });
-      return res.send(productFound);
+    } else {
+      const product = await Product.findByPk(id, {
+        include: [
+          {
+            model: Collection,
+            attributes: ["name"],
+          },
+          {
+            model: ProductsInCart,
+            attributes: ["id", "price", "quantity", "productName"],
+            include: [
+              {
+                model: Reviews,
+                attributes: ["id", "review", "score"],
+              },
+            ],
+          },
+        ],
+      });
+      res.status(200).send(product);
     }
   } catch (e) {
     return res.status(400).send({ e: "Id incorrecto" });

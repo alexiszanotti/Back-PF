@@ -1,56 +1,44 @@
-const { Reviews, Product, Cart } = require("../../db");
+const { Reviews, ProductsInCart, Cart, Product } = require("../../db");
 
 async function postReviews(req, res, next) {
-  const { review, score, productId, userId } = req.body;
-
+  const { review, score, productId, cartId, userId } = req.body;
+  console.log(cartId, "cartID")
   try {
-    const cart = await Cart.findOne({
-      where: {
-        status: "COMPLETED",
-        userId: userId,
-      },
-      include: [
-        {
-          model: Product,
-          where: {
-            id: productId,
-          },
+    if (cartId) {
+      const busqueda = await Cart.findAll({
+        where: {
+          status: "COMPLETED",
+          id: cartId,
         },
-      ],
-    });
-
-    if (!cart) {
-      return res.status(400).json({
-        message: "Carrito no encontrado",
-      });
+        include: [
+          {
+            model: ProductsInCart,
+            where:{
+              productId: productId,
+            },
+            include: [{
+              model: Reviews
+            }]
+          }
+        ]
+      })
+      if (busqueda.length > 0) {
+        let productoCart = await ProductsInCart.findOne({
+          where: {
+            CartId: cartId
+          }
+        })
+        let reseñaCreada = await Reviews.create({score: score, review: review})
+        let aux = await productoCart.setReviews(reseñaCreada) 
+        return res.status(200).send(aux)
+      } else {
+        return res.status(404).send({ message: "teo puto" })
+      }
+    }else{
+      res.status(400).send({message: "no hay cart ID"})
     }
-
-    const reviewExist = await Reviews.findOne({
-      where: {
-        productId: productId,
-        userId: userId,
-      },
-    });
-
-    if (reviewExist) {
-      return res.status(400).json({
-        message: "Ya has realizado una reseña de este producto",
-      });
-    }
-
-    const reviewCreated = await Reviews.create({
-      review,
-      score,
-      productId,
-      userId,
-    });
-
-    return res.status(201).json({
-      message: "Reseña creada",
-      reviewCreated,
-    });
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 }
 
