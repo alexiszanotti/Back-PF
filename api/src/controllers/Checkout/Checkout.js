@@ -1,7 +1,7 @@
 const { Cart, Product, ProductsInCart, User } = require("../../db");
 
 async function Checkout(req, res, next) {
-  const { cartId, InfoCart } = req.body;
+  const { cartId, InfoCart, infoProducts } = req.body;
   try {
     if (cartId && InfoCart) {
       const auxproductsInCart = await ProductsInCart.findAll({
@@ -15,21 +15,32 @@ async function Checkout(req, res, next) {
           },
         ],
       });
-      if (auxproductsInCart) {
+      if (auxproductsInCart.length > 0) {
+        //recorremos auxiliar auxproductsInCart para verificar si los productos que estoy recibiendo en infoproducts coinciden con los productos del
         for (let i = 0; i < auxproductsInCart.length; i++) {
-          const x = await ProductsInCart.update(
-            {
-              price: auxproductsInCart[i].product.salePrice,
-              productName: auxproductsInCart[i].product.productName,
-              quantity: 2,
-            },
-            {
-              where: {
-                id: auxproductsInCart[i].id,
-              },
+          for (let j = 0; j < infoProducts.length; j++) {
+            //la cantidad de auxProductsInCart tiene que ser igual a la cantidad de infoProducts
+            if (auxproductsInCart[i].productId === infoProducts[j].productId) {
+              const x = await ProductsInCart.update(
+                {
+                  price: infoProducts[i].salePrice,
+                  productName: infoProducts[i].productName,
+                  quantity: infoProducts[j].cantidad,
+                },
+                { where: { id: auxproductsInCart[i].id } }
+              );
+              if (x === 1) {
+                let updateStock = await Product.update(
+                  {
+                    stock: auxproductsInCart[i].stock - infoProducts[j].cantidad,
+                  },
+                  { where: { id: auxproductsInCart[i].productId } }
+                );
+              }
             }
-          );
+          }
         }
+
         const y = await Cart.update(
           {
             paymentMethod: InfoCart[0].paymentMethod,
@@ -44,7 +55,7 @@ async function Checkout(req, res, next) {
             },
           }
         );
-        return res.status(200).send({ msg: "el carrito se ha actualizado " });
+        return res.status(200).send({ msg: "El carrito se actualizó correctamente" });
       } else {
         return res.status(400)({ msg: "no se pudo actualizar el carrito" });
       }
