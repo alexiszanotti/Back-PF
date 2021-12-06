@@ -12,6 +12,9 @@ module.exports = sequelize => {
     userId: {
       type: DataTypes.TEXT,
     },
+    cartId: {
+      type: DataTypes.TEXT,
+    },
     paymentMethod: {
       type: DataTypes.STRING,
       allowNull: false,

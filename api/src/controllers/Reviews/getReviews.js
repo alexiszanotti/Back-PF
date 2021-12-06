@@ -2,7 +2,7 @@ const { Product, ProductsInCart, Reviews } = require("../../db");
 
 const getReviews = async (req, res) => {
   const { idProduct } = req.body;
-  console.log(idProduct);
+
   try {
     if (!idProduct) {
       return res.status(400).json({

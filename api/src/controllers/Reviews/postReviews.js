@@ -1,45 +1,47 @@
-const { Reviews, ProductsInCart, Cart } = require("../../db");
+const { Reviews, Product, CartSold } = require("../../db");
 
 async function postReviews(req, res, next) {
-  const { review, score, productId, cartId } = req.body;
+  const { review, score, productId, userId } = req.body;
 
   try {
-    if (cartId) {
-      const busqueda = await Cart.findAll({
+    if (userId) {
+      const busqueda = await CartSold.findAll({
         where: {
-          id: cartId,
+          userId: userId,
         },
-        include: [
-          {
-            model: ProductsInCart,
-            where: {
-              productId: productId,
-            },
-            include: [
-              {
-                model: Reviews,
-              },
-            ],
-          },
-        ],
       });
-      if (busqueda.length > 0) {
-        let productoCart = await ProductsInCart.findOne({
-          where: {
-            CartId: cartId,
-          },
-        });
-        let reseñaCreada = await Reviews.create({ score: score, review: review });
-        let aux = await productoCart.setReviews(reseñaCreada);
-        return res.status(200).send(aux);
+
+      if (!busqueda.length) {
+        return res.status(400).send({ message: "Usuario sin compras realizads (15)" });
       } else {
-        return res.status(404).send({ message: "teo puto" });
+        let productos = busqueda.map(item => item.products);
+
+        let saleProducts = productos.flat();
+
+        let findProduct = saleProducts.find(el => el.productId === productId);
+
+        if (findProduct) {
+          let productoCart = await Product.findOne({
+            where: {
+              id: productId,
+            },
+          });
+          if (!productoCart) {
+            return res.status(400).send({ message: "Producto no existe (29)" });
+          } else {
+            let reseñaCreada = await Reviews.create({ score: score, review: review });
+            let aux = await productoCart.addReviews(reseñaCreada);
+            return res.status(200).send({ message: "Reseña creada (33)", aux });
+          }
+        } else {
+          return res.status(404).send({ message: "Producto inexistente (36)" });
+        }
       }
     } else {
-      res.status(400).send({ message: "no hay cart ID" });
+      return res.status(400).send({ message: "Usuario inexistente (40)" });
     }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 }
 

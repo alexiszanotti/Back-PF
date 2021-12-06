@@ -35,7 +35,7 @@ async function getInfoPago(req, res, next) {
 
     const cartSold = await CartSold.create({
       userId: cart.users[0].id,
-      id: external_reference,
+      cartId: external_reference,
       status: "COMPLETED",
       dateOfPurchase: cart.dateOfPurchase,
       confirmationDate: cart.confirmationDate,
