@@ -82,8 +82,8 @@ Product.hasMany(ProductsInCart); // ProductsInCart Tiene muchas Product
 User.belongsTo(Cart); //
 Cart.hasMany(User); //
 
-Reviews.belongsTo(ProductsInCart);
-ProductsInCart.hasMany(Reviews);
+Reviews.belongsTo(Product); // Reviews pertenece a Product
+Product.hasMany(Reviews);
 
 // El usuario tiene un favorito
 // Aca vendrian las relaciones

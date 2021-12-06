@@ -16,14 +16,8 @@ const getProductById = async (req, res) => {
             attributes: ["name"],
           },
           {
-            model: ProductsInCart,
-            attributes: ["id", "price", "quantity", "productName"],
-            include: [
-              {
-                model: Reviews,
-                attributes: ["id", "review", "score"],
-              },
-            ],
+            model: Reviews,
+            attributes: ["id", "review", "score"],
           },
         ],
       });
