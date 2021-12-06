@@ -23,7 +23,8 @@ async function getInfoPago(req, res, next) {
         },
       ],
     });
-    cart.update({ status: "COMPLETED" });
+    const cart1 = await Cart.findByPk(external_reference);
+    cart1.update({ status: "COMPLETED" });
     const order = await Order.create({
       payment_id,
       payment_status: status,
