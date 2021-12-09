@@ -57,7 +57,7 @@ async function getInfoPago(req, res, next) {
       await user.setCart(carrito);
       await cart.removeUser(user);
 
-      res.redirect(`http://localhost:3000/home`);
+      res.redirect(`http://localhost:3000/realizado`);
     } else {
       return res.status(404).send({ Msge: "No existe usuario" });
     }
